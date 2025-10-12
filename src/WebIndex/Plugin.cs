@@ -10,6 +10,7 @@ namespace WebExpress.Tutorial.WebIndex
     [Description("webexpress.tutorial.webindex:plugin.description")]
     [Icon("/assets/img/webindex.svg")]
     [Application<Application>]
+    [Dependency("webexpress.webapp")]
     public sealed class Plugin : IPlugin
     {
         /// <summary>
