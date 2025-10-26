@@ -49,20 +49,20 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// </summary>
         /// <param name="request">The request object containing the criteria for retrieving options. Cannot be null.</param>
         /// <param name="row">The row object for which options are being retrieved. Cannot be null.</param>
-        public override IEnumerable<RestApiCrudTableRowOption> GetOptions(Request request, Model.Document row)
+        public override IEnumerable<RestApiCrudOption> GetOptions(Request request, Model.Document row)
         {
-            yield return new RestApiCrudTableRowOptionHeader(request)
+            yield return new RestApiCrudOptionHeader(request)
             {
                 Label = "webexpress.webapp:header.setting.label"
             };
 
-            yield return new RestApiCrudTableRowOptionEdit(request)
+            yield return new RestApiCrudOptionEdit(request)
             {
                 Uri = _formUri
             };
 
-            yield return new RestApiCrudTableRowOptionSeperator(request);
-            yield return new RestApiCrudTableRowOptionDelete(request);
+            yield return new RestApiCrudOptionSeperator(request);
+            yield return new RestApiCrudOptionDelete(request);
         }
 
         /// <summary>
