@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
   <package>
       <id>WebExpress.Tutorial.WebIndex</id>
-      <version>0.0.9-alpha</version>
+      <version>0.0.10-alpha</version>
       <title>WebIndex</title>
       <authors>rene_schwarzer@hotmail.de</authors>
       <license>MIT</license>
