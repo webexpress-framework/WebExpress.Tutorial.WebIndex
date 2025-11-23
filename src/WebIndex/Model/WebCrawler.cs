@@ -75,7 +75,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="url">The URL to crawl.</param>
         public static void Crawl(string url)
         {
-            if (url == null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<Document>($"url='{url}'").Apply().Any())
+            if (url is null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<Document>($"url='{url}'").Apply().Any())
             {
                 return;
             }

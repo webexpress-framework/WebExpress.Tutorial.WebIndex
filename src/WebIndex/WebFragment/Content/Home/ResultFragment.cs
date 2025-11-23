@@ -93,7 +93,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         {
             var param = e.RenderContext.Request.GetParameter("search");
 
-            if (param == null)
+            if (param is null)
             {
                 return;
             }

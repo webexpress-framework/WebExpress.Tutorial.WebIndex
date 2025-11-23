@@ -8,7 +8,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW
 {
     [WebIcon<IconHome>]
     [Title("webexpress.tutorial.webindex:homepage.label")]
-    [Segment(null, "webexpress.tutorial.webindex:homepage.label")]
+    [Segment(null)]
     [Scope<IScopeGeneral>]
     public sealed class Index : IPage<VisualTreeWebApp>, IScopeGeneral
     {

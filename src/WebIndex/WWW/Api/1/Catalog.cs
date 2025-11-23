@@ -84,7 +84,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// <returns>An enumeration of which json serializer can be serialized.</returns>
         public override IEnumerable<Model.Document> GetData(string filter, Request request)
         {
-            if (filter == null || filter == "null")
+            if (filter is null || filter == "null")
             {
                 return Data;
             }
