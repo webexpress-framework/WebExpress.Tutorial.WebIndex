@@ -1,10 +1,13 @@
-﻿using WebExpress.WebApp.WebControl;
-using WebExpress.WebUI.WebControl;
+﻿using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebIcon;
 
 namespace WebExpress.Tutorial.WebIndex.WebControl
 {
-    public class CatalogForm : ControlRestForm
+    /// <summary>
+    /// Represents a form for creating or editing a catalog index item, 
+    /// providing controls for entering the item's URI and title.
+    /// </summary>
+    public class CatalogForm : ControlForm
     {
         /// <summary>
         /// Returns or sets the uir associated with the object.
