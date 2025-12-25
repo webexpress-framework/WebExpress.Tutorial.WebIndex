@@ -23,7 +23,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// Starts the web crawling process for the given request.
         /// </summary>
         /// <param name="request">The request object containing the necessary parameters for the crawling process.</param>
-        public static void Crawl(Request request)
+        public static void Crawl(IRequest request)
         {
             WebEx.ComponentHub.GetComponentManager<IndexManager>()?.Clear<Document>();
             var applicationContext = WebEx.ComponentHub.ApplicationManager.GetApplication<Application>();
