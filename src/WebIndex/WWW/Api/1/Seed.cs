@@ -39,7 +39,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// The request object containing the criteria for retrieving options. Cannot be null.
         /// </param>
         /// <param name="row">The row object for which options are being retrieved. Cannot be null.</param>
-        public override IEnumerable<RestApiOption> GetOptions(Request request, Model.Seed row)
+        public override IEnumerable<RestApiOption> GetOptions(IRequest request, Model.Seed row)
         {
             yield return new RestApiOptionHeader(request)
             {
@@ -61,7 +61,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1
         /// <param name="filter">The filtering and sorting options.</param>
         /// <param name="request">The request.</param>
         /// <returns>An enumeration of which json serializer can be serialized.</returns>
-        public override IEnumerable<Model.Seed> GetData(string filter, Request request)
+        public override IEnumerable<Model.Seed> GetData(string filter, IRequest request)
         {
             if (filter is null || filter == "null")
             {
