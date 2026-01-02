@@ -10,9 +10,6 @@ app.license.uri=https://github.com/webexpress-framework/WebExpress.Tutorial.WebI
 app.about=Über WebIndex Tutorial
 app.version.label={0} Version {1} erstellt mit {2} Version {3}.
 
-module.name=WebIndex
-module.description=Modul der Anwendung WebIndex.
-
 homepage.label=Startseite
 homepage.conter=Ungefähr {0} Ergebnisse
 infopage.label=Info
