@@ -30,7 +30,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
             Icon = new IconPlus();
-            Modal = _modalDlg.Id;
+            Modal = new ModalTarget(_modalDlg?.Id);
         }
 
         /// <summary>
@@ -41,7 +41,10 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            return new HtmlList(base.Render(renderContext, visualTree), _modalDlg.Render(renderContext, visualTree));
+            return new HtmlList(base.Render(renderContext, visualTree), _modalDlg.Render
+            (
+                renderContext, visualTree
+            ));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.Tutorial.WebIndex.WWW.Setting;
-using WebExpress.WebApp.WebControl;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebComponent;
@@ -40,7 +39,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
             //Uri = componentHub.SitemapManager.GetUri<Catalog>(fragmentContext.ApplicationContext);
             Color = TypeColorText.Danger;
             Icon = new IconTrash();
-            Modal = DeleteModal.Id;
+            Modal = new ModalTarget(DeleteModal.Id);
 
             DeleteModal.Confirm += OnDeleteModalConfirm;
         }
