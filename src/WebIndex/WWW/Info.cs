@@ -52,19 +52,19 @@ namespace WebExpress.Tutorial.WebIndex.WWW
 
             card.Add(new ControlText()
             {
-                Text = I18N.Translate(renderContext.Request?.Culture, "webexpress.tutorial.webindex:app.name"),
+                Text = I18N.Translate(renderContext, "webexpress.tutorial.webindex:app.name"),
                 Format = TypeFormatText.H3
             });
 
             card.Add(new ControlText()
             {
-                Text = I18N.Translate(renderContext.Request?.Culture, "webexpress.tutorial.webindex:app.description"),
+                Text = I18N.Translate(renderContext, "webexpress.tutorial.webindex:app.description"),
                 Format = TypeFormatText.Paragraph
             });
 
             card.Add(new ControlText()
             {
-                Text = I18N.Translate(renderContext.Request?.Culture, "webexpress.tutorial.webindex:app.about"),
+                Text = I18N.Translate(renderContext, "webexpress.tutorial.webindex:app.about"),
                 Format = TypeFormatText.H3
             });
 
@@ -72,8 +72,8 @@ namespace WebExpress.Tutorial.WebIndex.WWW
             {
                 Text = string.Format
                 (
-                    I18N.Translate(renderContext.Request?.Culture, "webexpress.tutorial.webindex:app.version.label"),
-                    I18N.Translate(renderContext.Request?.Culture, webindex?.PluginName),
+                    I18N.Translate(renderContext, "webexpress.tutorial.webindex:app.version.label"),
+                    I18N.Translate(renderContext, webindex?.PluginName),
                     webindex?.Version,
                     webexpress?.PluginName,
                     webexpress?.Version
