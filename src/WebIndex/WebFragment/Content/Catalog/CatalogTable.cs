@@ -1,10 +1,9 @@
-﻿using WebExpress.WebApp.WebSection;
+﻿using WebExpress.WebApp.WebFragment;
+using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebCore.WebSitemap;
-using WebExpress.WebUI.WebControl;
-using WebExpress.WebUI.WebFragment;
 using WebExpress.WebUI.WebPage;
 
 namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
@@ -15,20 +14,19 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     /// <remarks>
     /// This fragment is used to display a table with initial pages and provides options to manage them.
     /// </remarks>
-    [Section<SectionContentPreferences>]
-    [Scope<WWW.Setting.Seed>]
-    public sealed class SeedDescriptionFragment : FragmentControlText
+    [Section<SectionContentPrimary>]
+    [Scope<WWW.Setting.Catalog.Index>]
+    public sealed class CatalogTable : FragmentControlRestTable
     {
         /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
         /// <param name="sitemapManager">The sitemap manager.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public SeedDescriptionFragment(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
+        public CatalogTable(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:setting.seed.description";
-            Format = TypeFormatText.Markdown;
+            RestUri = sitemapManager.GetUri<WWW.Api._1.Catalog.Table>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>

@@ -5,22 +5,22 @@ using WebExpress.WebCore.WebPage;
 using WebExpress.WebCore.WebSettingPage;
 using WebExpress.WebUI.WebIcon;
 
-namespace WebExpress.Tutorial.WebIndex.WWW.Setting
+namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Catalog
 {
     /// <summary>
-    /// Represents the settings page for the catalog.
+    /// Represents a settings page for configuring web application catalog settings.
     /// </summary>
     [WebIcon<IconGlobe>]
     [Title("webexpress.tutorial.webindex:setting.catalog.label")]
     [SettingGroup<SettingGroupGeneralGeneral>()]
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
-    public sealed class Catalog : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
+    public class Add : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public Catalog()
+        public Add()
         {
         }
 

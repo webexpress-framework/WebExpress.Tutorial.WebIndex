@@ -14,13 +14,13 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
     /// Represents a fragment control form for initiating a web crawling operation.
     /// </summary>
     [Section<SectionHeadlineSecondary>]
-    [Scope<WWW.Setting.Seed>]
-    public sealed class CrawlFragment : FragmentControlForm
+    [Scope<WWW.Setting.Seed.Index>]
+    public sealed class CrawlButton : FragmentControlForm
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public CrawlFragment(IFragmentContext fragmentContext)
+        public CrawlButton(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);

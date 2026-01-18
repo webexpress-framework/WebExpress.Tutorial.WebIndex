@@ -16,18 +16,18 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     /// This fragment is used to display a table with initial pages and provides options to manage them.
     /// </remarks>
     [Section<SectionContentPreferences>]
-    [Scope<WWW.Setting.Catalog>]
-    public sealed class CatalogDescriptionFragment : FragmentControlText
+    [Scope<WWW.Setting.Seed.Index>]
+    public sealed class SeedDescription : FragmentControlText
     {
         /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
         /// <param name="sitemapManager">The sitemap manager.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public CatalogDescriptionFragment(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
+        public SeedDescription(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:setting.catalog.description";
+            Text = "webexpress.tutorial.webindex:setting.seed.description";
             Format = TypeFormatText.Markdown;
         }
 

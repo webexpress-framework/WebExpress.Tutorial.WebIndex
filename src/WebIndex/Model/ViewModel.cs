@@ -20,6 +20,16 @@ namespace WebExpress.Tutorial.WebIndex.Model
         private static IndexManager _indexManager;
 
         /// <summary>
+        /// Returns all seeds.
+        /// </summary>
+        public static IEnumerable<Seed> Seeds => _indexManager.All<Seed>();
+
+        /// <summary>
+        /// Returns the catalog items.
+        /// </summary>
+        public static IEnumerable<CatalogItem> Catalog => _indexManager.All<CatalogItem>();
+
+        /// <summary>
         /// Initialization.
         /// </summary>
         /// <param name="componentHub">The component hub used to manage components.</param>
@@ -31,7 +41,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
 
             // indexing the data
             _indexManager.Create<Seed>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
-            _indexManager.Create<Document>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
+            _indexManager.Create<CatalogItem>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
 
 
             if (!_indexManager.All<Seed>().Any())
@@ -49,7 +59,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="context"> The render context containing the request information.</param>
         public static void ClearCatalog(IRenderContext context)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Clear<Document>();
+            _componentHub.GetComponentManager<IndexManager>()?.Clear<CatalogItem>();
 
             _componentHub.GetComponentManager<NotificationManager>()?.AddNotification
             (
@@ -82,21 +92,18 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// Deletes a seed with the specified identifier.
         /// </summary>
         /// <param name="id">
-        /// The unique identifier of the seed to delete, represented as a 
-        /// string. Must be a valid GUID.
+        /// The unique identifier of the seed to delete. Must be a valid GUID.
         /// </param>
-        public static void DeleteSeed(string id)
+        public static void DeleteSeed(Guid id)
         {
-            var guid = System.Guid.Parse(id);
-
-            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Seed>(guid);
+            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Seed>(id);
         }
 
         /// <summary>
         /// Updates the specified document in the system by inserting it into the index manager.
         /// </summary>
         /// <param name="document">The document to be updated. Cannot be null.</param>
-        public static void UpdateDocument(Document document)
+        public static void UpdateDocument(CatalogItem document)
         {
             _componentHub.GetComponentManager<IndexManager>()?.Update(document);
         }
@@ -105,14 +112,11 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// Deletes a document with the specified identifier from the index.
         /// </summary>
         /// <param name="id">
-        /// The unique identifier of the document to delete, represented as a 
-        /// string. Must be a valid GUID.
+        /// The unique identifier of the document to delete. Must be a valid GUID.
         /// </param>
-        public static void DeleteDocument(string id)
+        public static void DeleteDocument(Guid id)
         {
-            var guid = System.Guid.Parse(id);
-
-            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Document>(guid);
+            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.CatalogItem>(id);
         }
 
         /// <summary>
@@ -120,9 +124,9 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// </summary>
         /// <param name="search">The search string to match against the index.</param>
         /// <returns>An enumerable that match the search string.</returns>
-        public static IEnumerable<Document> Retrieve(string search)
+        public static IEnumerable<CatalogItem> Retrieve(string search)
         {
-            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<Document>(search)?.Apply().Where(x => x != null);
+            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<CatalogItem>(search)?.Apply().Where(x => x != null);
         }
     }
 }

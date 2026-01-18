@@ -1,13 +1,21 @@
-﻿using WebExpress.WebUI.WebControl;
+﻿using WebExpress.WebApp.WebControl;
+using WebExpress.WebApp.WebFragment;
+using WebExpress.WebApp.WebSection;
+using WebExpress.WebCore.WebAttribute;
+using WebExpress.WebCore.WebFragment;
+using WebExpress.WebCore.WebSitemap;
+using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebIcon;
 
-namespace WebExpress.Tutorial.WebIndex.WebControl
+namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
 {
     /// <summary>
-    /// Represents a form for creating or editing a catalog index item, 
+    /// Represents a form for editing a catalog index item, 
     /// providing controls for entering the item's URI and title.
     /// </summary>
-    public class CatalogForm : ControlForm
+    [Section<SectionContentPreferences>]
+    [Scope<WWW.Setting.Catalog.Id.Edit>]
+    public class CatalogFormEdit : FragmentControlRestFormEdit
     {
         /// <summary>
         /// Returns or sets the uir associated with the object.
@@ -15,7 +23,7 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         public ControlFormItemInputText ItemUri { get; } = new ControlFormItemInputText
         {
             Label = "Uri",
-            Name = nameof(Model.Document.Url),
+            Name = nameof(Model.CatalogItem.Url),
             Placeholder = "Enter the uri of the index item.",
             Required = true,
             MaxLength = 100,
@@ -29,7 +37,7 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         public ControlFormItemInputText Title { get; } = new ControlFormItemInputText
         {
             Label = "Title",
-            Name = nameof(Model.Document.Title),
+            Name = nameof(Model.CatalogItem.Title),
             Format = TypeEditTextFormat.Wysiwyg,
             Placeholder = "Enter a brief description of the index item",
             Required = true,
@@ -38,25 +46,18 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         };
 
         /// <summary>
-        /// Returns the submit button control for the form.
-        /// </summary>
-        public ControlFormItemButtonSubmit Submit { get; } = new ControlFormItemButtonSubmit
-        {
-
-        };
-
-        /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        /// <param name="id">The unique identifier for the form control.</param>
-        public CatalogForm(string id)
-            : base(id)
+        /// <param name="sitemapManager">The sitemap manager.</param>
+        /// <param name="fragmentContext">The context of the fragment.</param>
+        public CatalogFormEdit(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
+            : base(fragmentContext)
         {
-            Enable = false;
-
             Add(ItemUri);
             Add(Title);
-            AddPrimaryButton(Submit);
+
+            Mode = TypeRestFormMode.Edit;
+            Uri = sitemapManager.GetUri<WWW.Api._1.Catalog.Index>(fragmentContext.ApplicationContext);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="request">The request object containing the necessary parameters for the crawling process.</param>
         public static void Crawl(IRequest request)
         {
-            WebEx.ComponentHub.GetComponentManager<IndexManager>()?.Clear<Document>();
+            WebEx.ComponentHub.GetComponentManager<IndexManager>()?.Clear<CatalogItem>();
             var applicationContext = WebEx.ComponentHub.ApplicationManager.GetApplication<Application>();
 
             foreach (var initial in WebEx.ComponentHub.GetComponentManager<IndexManager>().All<Seed>())
@@ -47,7 +47,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
                 {
                     Crawl(url);
 
-                    var count = WebEx.ComponentHub.GetComponentManager<IndexManager>().Count<Document>();
+                    var count = WebEx.ComponentHub.GetComponentManager<IndexManager>().Count<CatalogItem>();
                     var trimAndEllipsisUrl = url.Length > 80 ? string.Concat(url.AsSpan(0, 77), "...") : url;
 
                     notification.Message = I18N.Translate
@@ -75,7 +75,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="url">The URL to crawl.</param>
         public static void Crawl(string url)
         {
-            if (url is null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<Document>($"url='{url}'").Apply().Any())
+            if (url is null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<CatalogItem>($"url='{url}'").Apply().Any())
             {
                 return;
             }
@@ -90,7 +90,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
 
                 if (!string.IsNullOrWhiteSpace(title) && !string.IsNullOrWhiteSpace(content))
                 {
-                    var webPageData = new Document
+                    var webPageData = new CatalogItem
                     {
                         Id = Guid.NewGuid(),
                         Url = url,

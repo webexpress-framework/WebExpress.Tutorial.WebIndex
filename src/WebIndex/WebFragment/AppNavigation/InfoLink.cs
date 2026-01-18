@@ -13,28 +13,28 @@ using WebExpress.WebUI.WebPage;
 namespace WebExpress.Tutorial.WebIndex.WebFragment.AppNavigation
 {
     /// <summary>
-    /// Represents a navigation item link for the home page.
+    /// Represents a navigation item link for the info page.
     /// </summary>
     /// <remarks>
     /// This fragment is used to create a navigation link to the Info page with an icon and label.
     /// </remarks>
-    [Section<SectionAppNavigationPrimary>]
+    [Section<SectionAppNavigationSecondary>]
     [Scope<IScopeGeneral>]
     [Scope<IScopeAdmin>]
     [Cache]
-    public sealed class HomeLinkFragment : FragmentControlNavigationItemLink
+    public sealed class InfoLink : FragmentControlNavigationItemLink
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="componentHub">The component hub used to manage components.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public HomeLinkFragment(IComponentHub componentHub, IFragmentContext fragmentContext)
+        public InfoLink(IComponentHub componentHub, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:homepage.label";
-            Uri = componentHub.SitemapManager.GetUri<Index>(fragmentContext.ApplicationContext);
-            Icon = new IconHome();
+            Text = "webexpress.tutorial.webindex:infopage.label";
+            Uri = componentHub.SitemapManager.GetUri<Info>(fragmentContext.ApplicationContext);
+            Icon = new IconInfoCircle();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.AppNavigation
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            Active = renderContext.Endpoint is Index ? TypeActive.Active : TypeActive.None;
+            Active = renderContext.Endpoint is Info ? TypeActive.Active : TypeActive.None;
 
             return base.Render(renderContext, visualTree);
         }

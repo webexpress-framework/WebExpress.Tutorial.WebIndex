@@ -1,9 +1,9 @@
-﻿using WebExpress.Tutorial.WebIndex.WebControl;
-using WebExpress.Tutorial.WebIndex.WWW.Setting;
+﻿using WebExpress.Tutorial.WebIndex.WWW.Setting.Seed;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
+using WebExpress.WebCore.WebSitemap;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebFragment;
 using WebExpress.WebUI.WebIcon;
@@ -15,22 +15,25 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
     /// Represents a fragment control button link for adding an initial link.
     /// </summary>
     [Section<SectionHeadlineSecondary>]
-    [Scope<Seed>]
-    public sealed class AddSeedFragment : FragmentControlButtonLink
+    [Scope<Index>]
+    public sealed class SeedAddButton : FragmentControlButtonLink
     {
-        private readonly SeedForm _modalDlg = new("add_initialpage");
-
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public AddSeedFragment(IFragmentContext fragmentContext)
+        /// <param name="sitemapManager">The sitemap manager.</param>
+        /// <param name="fragmentContext">
+        /// The context associated with the fragment, providing necessary data and services for its operation. 
+        /// </param>
+        public SeedAddButton(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
             Text = "webexpress.tutorial.webindex:add.label";
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
             Icon = new IconPlus();
-            Modal = new ModalTarget(_modalDlg?.Id);
+            Modal = new ModalTarget("modal-form", TypeModalSize.ExtraLarge);
+            Uri = sitemapManager.GetUri<WWW.Setting.Seed.Add>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
@@ -41,10 +44,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            return new HtmlList(base.Render(renderContext, visualTree), _modalDlg.Render
-            (
-                renderContext, visualTree
-            ));
+            return base.Render(renderContext, visualTree);
         }
     }
 }

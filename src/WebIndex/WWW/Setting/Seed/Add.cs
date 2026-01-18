@@ -5,22 +5,23 @@ using WebExpress.WebCore.WebPage;
 using WebExpress.WebCore.WebSettingPage;
 using WebExpress.WebUI.WebIcon;
 
-namespace WebExpress.Tutorial.WebIndex.WWW.Setting
+namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed
 {
     /// <summary>
-    /// Represents a settings page for configuring general settings in a web application.
+    /// Represents a settings page for configuring web application catalog settings.
     /// </summary>
-    [WebIcon<IconSeedling>]
-    [Title("webexpress.tutorial.webindex:setting.seed.label")]
+    [WebIcon<IconPlus>]
+    [Title("webexpress.tutorial.webindex:setting.seed.add")]
     [SettingGroup<SettingGroupGeneralGeneral>()]
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
-    public sealed class Seed : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
+    [SettingHide]
+    public sealed class Add : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
-        public Seed()
+        public Add()
         {
         }
 

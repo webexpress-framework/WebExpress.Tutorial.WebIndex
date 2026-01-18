@@ -1,5 +1,5 @@
 ﻿using WebExpress.Tutorial.WebIndex.Model;
-using WebExpress.Tutorial.WebIndex.WWW.Setting;
+using WebExpress.Tutorial.WebIndex.WWW.Setting.Catalog;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebComponent;
@@ -19,8 +19,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
     /// This fragment is used within the secondary toolbar to provide a link to the index settings page.
     /// </remarks>
     [Section<SectionHeadlineMoreSecondary>]
-    [Scope<Catalog>]
-    public sealed class ClearCatalogFragment : FragmentControlDropdownItemLink
+    [Scope<Index>]
+    public sealed class CatalogClearButton : FragmentControlDropdownItemLink
     {
         /// <summary>
         /// Returns the modal form used to confirm delete operations.
@@ -32,7 +32,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         /// </summary>
         /// <param name="componentHub">The component hub used to manage components.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public ClearCatalogFragment(IComponentHub componentHub, IFragmentContext fragmentContext)
+        public CatalogClearButton(IComponentHub componentHub, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
             Text = "webexpress.tutorial.webindex:setting.catalog.clear.label";

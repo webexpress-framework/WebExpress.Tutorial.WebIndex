@@ -1,6 +1,4 @@
-﻿using WebExpress.Tutorial.WebIndex.WebControl;
-using WebExpress.WebApp.WebControl;
-using WebExpress.WebApp.WebSection;
+﻿using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
@@ -17,40 +15,20 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     /// <remarks>
     /// This fragment is used to display a table with initial pages and provides options to manage them.
     /// </remarks>
-    [Section<SectionContentPrimary>]
-    [Scope<WWW.Setting.Catalog>]
-    public sealed class CatalogTableFragment : FragmentControlPanel
+    [Section<SectionContentPreferences>]
+    [Scope<WWW.Setting.Catalog.Index>]
+    public sealed class CatalogDescription : FragmentControlText
     {
-        /// <summary>
-        /// Returns the table.
-        /// </summary>
-        private ControlRestTable Table { get; } = new ControlRestTable()
-        {
-            Margin = new PropertySpacingMargin
-            (
-                PropertySpacing.Space.None,
-                PropertySpacing.Space.None,
-                PropertySpacing.Space.None,
-                PropertySpacing.Space.Three
-            )
-        };
-
         /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
         /// <param name="sitemapManager">The sitemap manager.</param>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
-        public CatalogTableFragment(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
+        public CatalogDescription(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            var form = new CatalogForm("indexForm");
-            var uri = sitemapManager.GetUri<WWW.Setting.Catalog>(fragmentContext.ApplicationContext);
-
-            Table.RestUri = sitemapManager.GetUri<WWW.Api._1.Catalog>(fragmentContext.ApplicationContext);
-
-            form.ItemUri.Initialize(x => x.Value.Text = uri?.ToString());
-
-            Table.Add(form);
+            Text = "webexpress.tutorial.webindex:setting.catalog.description";
+            Format = TypeFormatText.Markdown;
         }
 
         /// <summary>
@@ -61,7 +39,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            return Table.Render(renderContext, visualTree);
+            return base.Render(renderContext, visualTree);
         }
     }
 }

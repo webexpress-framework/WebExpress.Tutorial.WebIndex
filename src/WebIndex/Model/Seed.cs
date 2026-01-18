@@ -1,5 +1,6 @@
 ﻿using System;
 using WebExpress.WebApp.WebAttribute;
+using WebExpress.WebCore.WebDomain;
 using WebExpress.WebIndex;
 using WebExpress.WebIndex.WebAttribute;
 
@@ -8,7 +9,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
     /// <summary>
     /// The class contains information about a initial webpage.
     /// </summary>
-    public class Seed : IIndexItem
+    public class Seed : IIndexItem, IDomain
     {
         /// <summary>
         /// The URL of the webpage.
