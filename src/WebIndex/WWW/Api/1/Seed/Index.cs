@@ -29,11 +29,15 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
         /// An object containing the query parameters used to filter and select index items. Cannot 
         /// be null.
         /// </param>
+        /// <param name="context">
+        /// The context in which the query is executed. Provides additional information or constraints 
+        /// for the retrieval operation. Cannot be null.
+        /// </param>
         /// <returns>
         /// A collection representing the filtered set of index items. 
         /// The collection may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query)
+        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query, IQueryContext context)
         {
             return query.Apply(ViewModel.Seeds.AsQueryable());
         }

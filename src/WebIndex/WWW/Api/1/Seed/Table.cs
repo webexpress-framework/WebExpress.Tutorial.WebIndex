@@ -103,11 +103,15 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
         /// An object containing the query parameters used to filter and select index items. Cannot 
         /// be null.
         /// </param>
+        /// <param name="context">
+        /// The context in which the query is executed. Provides additional information or constraints 
+        /// for the retrieval operation. Cannot be null.
+        /// </param>
         /// <returns>
         /// An <see cref="IQueryable{TIndexItem}"/> representing the filtered set of index items. The 
         /// result may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query)
+        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query, IQueryContext context)
         {
             return query.Apply(ViewModel.Seeds.AsQueryable());
         }
@@ -126,32 +130,25 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
         /// The request that provides the operational context for resolving
         /// the appropriate REST API URI.
         /// </param>
-        /// <returns>
-        /// A new query representing the result of applying the WQL filter to the input 
-        /// query. The returned query may be further composed or executed to retrieve 
-        /// filtered results.
-        /// </returns>
-        public override IQuery<Model.Seed> Filter(string filter, IQuery<Model.Seed> query, IRequest request)
+        protected override void Filter(string filter, IQuery<Model.Seed> query, IRequest request)
         {
             if (filter is null || filter == "null")
             {
-                return query;
+                return;
             }
 
-            query = query.Where
+            query.Where
             (
                 x => x.Url.Contains(filter, StringComparison.InvariantCultureIgnoreCase)
             );
 
             if (request.GetParameter<ParameterGuid>() is Parameter category)
             {
-                query = query.Where
+                query.Where
                 (
                     x => x.Url.Contains(category.Value.ToLower(), StringComparison.CurrentCultureIgnoreCase)
                 );
             }
-
-            return query;
         }
     }
 }
