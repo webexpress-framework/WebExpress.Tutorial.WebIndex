@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
-using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
+using WebExpress.WebIndex.Queries;
 
 namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
 {
@@ -24,79 +23,19 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
         }
 
         /// <summary>
-        /// Retrieves a collection of index items of type TIndexItem.
+        /// Retrieves a queryable collection of index items that match the specified query criteria.
         /// </summary>
-        /// <returns>
-        /// An enumerable collection of TIndexItem objects. The collection is empty if 
-        /// no items are available.
-        /// </returns>
-        protected override IEnumerable<Model.Seed> Retrieve()
-        {
-            return ViewModel.Seeds;
-        }
-
-        /// <summary>
-        /// Retrieves the data required to create a new workspace entity.
-        /// </summary>
-        /// <param name="request">
-        /// The request context containing parameters and metadata for the retrieval operation.
+        /// <param name="query">
+        /// An object containing the query parameters used to filter and select index items. Cannot 
+        /// be null.
         /// </param>
         /// <returns>
-        /// An object containing the information necessary to initialize a new workspace for creation.
+        /// A collection representing the filtered set of index items. 
+        /// The collection may be empty if no items match the query.
         /// </returns>
-        protected override IRestApiCrudResultRetrieve<Model.Seed> RetrieveForCreate(IRequest request)
+        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query)
         {
-            return new RestApiCrudResultRetrieve<Model.Seed>()
-            {
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.seed.add.header")
-            };
-        }
-
-        /// <summary>
-        /// Retrieves a workspace identified by the specified key for update operations.
-        /// </summary>
-        /// <param name="id">
-        /// The unique identifier that identifies the workspace to retrieve. Cannot be null or empty.
-        /// </param>
-        /// <param name="request">
-        /// The request context containing additional information for the retrieval operation.
-        /// </param>
-        /// <returns>
-        /// An object containing the workspace associated with the specified key.
-        /// </returns>
-        protected override IRestApiCrudResultRetrieve<Model.Seed> RetrieveForUpdate(string id, IRequest request)
-        {
-            return new RestApiCrudResultRetrieve<Model.Seed>()
-            {
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.seed.edit.header"),
-                Data = ViewModel.Seeds.Where(x => x.Id == Guid.Parse(id)).FirstOrDefault()
-            };
-        }
-
-        /// <summary>
-        /// Retrieves the workspace entity identified by the specified ID in preparation for deletion.
-        /// </summary>
-        /// <param name="id">
-        /// The unique identifier of the workspace to retrieve for deletion. Cannot 
-        /// be null or empty.
-        /// </param>
-        /// <param name="request">
-        /// The request context containing additional information for 
-        /// the retrieval operation.
-        /// </param>
-        /// <returns>
-        /// An object containing the workspace entity and related information required 
-        /// for the delete operation.
-        /// </returns>
-        protected override IRestApiCrudResultRetrieveDelete<Model.Seed> RetrieveForDelete(string id, IRequest request)
-        {
-            var data = ViewModel.Seeds.Where(x => x.Id == Guid.Parse(id)).FirstOrDefault();
-            return new RestApiCrudResultRetrieveDelete<Model.Seed>()
-            {
-                Data = data,
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.seed.delete.header"),
-                ConfirmItem = data?.Id.ToString()
-            };
+            return query.Apply(ViewModel.Seeds.AsQueryable());
         }
 
         /// <summary>

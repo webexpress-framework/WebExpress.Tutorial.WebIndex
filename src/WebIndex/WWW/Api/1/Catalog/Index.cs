@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
@@ -7,6 +6,7 @@ using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
+using WebExpress.WebIndex.Queries;
 
 namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
 {
@@ -14,7 +14,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
     /// Represents a REST API endpoint for operations on catalog entities.
     /// </summary>
     [Cache]
-    public sealed class Index : RestApiCrud<Model.CatalogItem>
+    public sealed class Index : RestApiCrud<CatalogItem>
     {
         /// <summary>
         /// Initializes a new instance of the class.
@@ -24,57 +24,64 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         }
 
         /// <summary>
-        /// Retrieves a collection of index items of type TIndexItem.
+        /// Retrieves a queryable collection of index items that match the specified query criteria.
         /// </summary>
+        /// <param name="query">
+        /// An object containing the query parameters used to filter and select index items. Cannot 
+        /// be null.
+        /// </param>
         /// <returns>
-        /// An enumerable collection of TIndexItem objects. The collection is empty if 
-        /// no items are available.
+        /// A collection representing the filtered set of index items. 
+        /// The collection may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<Model.CatalogItem> Retrieve()
+        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query)
         {
-            return ViewModel.Catalog;
+            return query.Apply(ViewModel.Catalog.AsQueryable());
         }
 
         /// <summary>
-        /// Retrieves a workspace identified by the specified key for update operations.
+        /// Retrieves an item by its identifier for update operations.
         /// </summary>
-        /// <param name="id">
-        /// The unique identifier that identifies the workspace to retrieve. Cannot be null or empty.
+        /// <param name="query">
+        /// An object containing the query parameters used to filter and select index items. Cannot 
+        /// be null.
         /// </param>
-        /// <param name="request">
-        /// The request context containing additional information for the retrieval operation.
-        /// </param>
+        /// <param name="request">The request.</param>
         /// <returns>
-        /// An object containing the workspace associated with the specified key.
+        /// A result instance representing the data and metadata required
+        /// to initialize a new item for creation.
         /// </returns>
-        protected override IRestApiCrudResultRetrieve<Model.CatalogItem> RetrieveForUpdate(string id, IRequest request)
+        protected override IRestApiCrudResultRetrieve<CatalogItem> RetrieveForUpdate(IQuery<CatalogItem> query, IRequest request)
         {
+            var data = Retrieve(query)
+                .FirstOrDefault();
+
             return new RestApiCrudResultRetrieve<Model.CatalogItem>()
             {
                 Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.edit.header"),
-                Data = ViewModel.Catalog.Where(x => x.Id == Guid.Parse(id)).FirstOrDefault()
+                Data = data
             };
         }
 
         /// <summary>
-        /// Retrieves the workspace entity identified by the specified ID in preparation for deletion.
+        /// Retrieves the item identified by the specified ID for the purpose of confirming 
+        /// or preparing a delete operation.
         /// </summary>
-        /// <param name="id">
-        /// The unique identifier of the workspace to retrieve for deletion. Cannot 
-        /// be null or empty.
+        /// <param name="query">
+        /// An object containing the query parameters used to filter and select index items. Cannot 
+        /// be null.
         /// </param>
-        /// <param name="request">
-        /// The request context containing additional information for 
-        /// the retrieval operation.
-        /// </param>
+        /// <param name="request">The request.</param>
         /// <returns>
-        /// An object containing the workspace entity and related information required 
-        /// for the delete operation.
+        /// A result instance representing the data and metadata required
+        /// to initialize a new item for creation.
         /// </returns>
-        protected override IRestApiCrudResultRetrieveDelete<Model.CatalogItem> RetrieveForDelete(string id, IRequest request)
+        protected override IRestApiCrudResultRetrieveDelete<CatalogItem> RetrieveForDelete(IQuery<CatalogItem> query, IRequest request)
         {
-            var data = ViewModel.Catalog.Where(x => x.Id == Guid.Parse(id)).FirstOrDefault();
-            return new RestApiCrudResultRetrieveDelete<Model.CatalogItem>()
+            var data = Retrieve(query)
+                .FirstOrDefault();
+
+            return new RestApiCrudResultRetrieveDelete<CatalogItem>()
             {
                 Data = data,
                 Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.delete.header"),
