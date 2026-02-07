@@ -55,13 +55,13 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// A result instance representing the data and metadata required
         /// to initialize a new item for creation.
         /// </returns>
-        protected override IRestApiCrudResultRetrieve<CatalogItem> RetrieveForUpdate(IQuery<CatalogItem> query, IRequest request)
+        protected override IRestApiCrudResultRetrieve RetrieveForUpdate(IQuery<CatalogItem> query, IRequest request)
         {
             using var context = CreateContext();
             var data = Retrieve(query, context)
                 .FirstOrDefault();
 
-            return new RestApiCrudResultRetrieve<Model.CatalogItem>()
+            return new RestApiCrudResultRetrieve()
             {
                 Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.edit.header"),
                 Data = data
@@ -81,13 +81,13 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// A result instance representing the data and metadata required
         /// to initialize a new item for creation.
         /// </returns>
-        protected override IRestApiCrudResultRetrieveDelete<CatalogItem> RetrieveForDelete(IQuery<CatalogItem> query, IRequest request)
+        protected override IRestApiCrudResultRetrieveDelete RetrieveForDelete(IQuery<CatalogItem> query, IRequest request)
         {
             using var context = CreateContext();
             var data = Retrieve(query, context)
                 .FirstOrDefault();
 
-            return new RestApiCrudResultRetrieveDelete<CatalogItem>()
+            return new RestApiCrudResultRetrieveDelete()
             {
                 Data = data,
                 Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.delete.header"),
