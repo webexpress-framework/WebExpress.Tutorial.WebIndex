@@ -34,11 +34,14 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// The context in which the query is executed. Provides additional information or constraints 
         /// for the retrieval operation. Cannot be null.
         /// </param>
+        /// <param name="request">
+        /// The request that provides the operational context.
+        /// </param>
         /// <returns>
         /// A collection representing the filtered set of index items. 
         /// The collection may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query, IQueryContext context)
+        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query, IQueryContext context, IRequest request)
         {
             return query.Apply(ViewModel.Catalog.AsQueryable());
         }
@@ -58,7 +61,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         protected override IRestApiCrudResultRetrieve RetrieveForUpdate(IQuery<CatalogItem> query, IRequest request)
         {
             using var context = CreateContext();
-            var data = Retrieve(query, context)
+            var data = Retrieve(query, context, request)
                 .FirstOrDefault();
 
             return new RestApiCrudResultRetrieve()
@@ -84,7 +87,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         protected override IRestApiCrudResultRetrieveDelete RetrieveForDelete(IQuery<CatalogItem> query, IRequest request)
         {
             using var context = CreateContext();
-            var data = Retrieve(query, context)
+            var data = Retrieve(query, context, request)
                 .FirstOrDefault();
 
             return new RestApiCrudResultRetrieveDelete()
