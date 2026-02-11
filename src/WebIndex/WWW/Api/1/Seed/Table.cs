@@ -58,23 +58,29 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
 
             yield return new RestApiOptionEdit(request)
             {
-                Uri = _editFormUri?.SetParameters
+                PrimaryAction = new ActionModal
                 (
-                    new ParameterGuid(row.Id)
-                )?
-                    .ToString(),
-                Modal = new ModalTarget("modal-form", TypeModalSize.ExtraLarge)
+                    "modal-form",
+                    _editFormUri?.SetParameters
+                    (
+                        new ParameterGuid(row.Id)
+                    ),
+                    TypeModalSize.ExtraLarge
+                )
             };
 
             yield return new RestApiOptionSeperator(request);
             yield return new RestApiOptionDelete(request)
             {
-                Uri = _deleteFormUri?.SetParameters
+                PrimaryAction = new ActionModal
                 (
-                    new ParameterGuid(row.Id)
-                )?
-                    .ToString(),
-                Modal = new ModalTarget("modal-form", TypeModalSize.Small)
+                    "modal-form",
+                    _deleteFormUri?.SetParameters
+                    (
+                        new ParameterGuid(row.Id)
+                    ),
+                    TypeModalSize.Small
+                )
             };
         }
 

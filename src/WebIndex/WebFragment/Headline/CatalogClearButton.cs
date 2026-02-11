@@ -39,7 +39,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
             //Uri = componentHub.SitemapManager.GetUri<Catalog>(fragmentContext.ApplicationContext);
             Color = TypeColorText.Danger;
             Icon = new IconTrash();
-            Modal = new ModalTarget(DeleteModal.Id);
+            PrimaryAction = new ActionModal(DeleteModal.Id);
 
             DeleteModal.Confirm += OnDeleteModalConfirm;
         }

@@ -32,8 +32,12 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
             Icon = new IconPlus();
-            Modal = new ModalTarget("modal-form", TypeModalSize.ExtraLarge);
-            Uri = sitemapManager.GetUri<WWW.Setting.Seed.Add>(fragmentContext.ApplicationContext);
+            PrimaryAction = new ActionModal
+            (
+                "modal-form",
+                sitemapManager.GetUri<WWW.Setting.Seed.Add>(fragmentContext.ApplicationContext),
+                TypeModalSize.ExtraLarge
+            );
         }
 
         /// <summary>
