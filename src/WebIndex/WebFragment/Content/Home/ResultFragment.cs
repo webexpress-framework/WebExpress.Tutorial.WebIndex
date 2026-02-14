@@ -40,7 +40,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// <summary>
         /// Returns the list control for displaying search results.
         /// </summary>
-        public ControlVirtualList List { get; } = new ControlVirtualList()
+        public ControlList List { get; } = new ControlList()
         {
             Margin = new PropertySpacingMargin
             (
@@ -80,8 +80,6 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
             Add(Counter);
             Add(List);
             Add(Pagination);
-
-            List.RetrieveVirtualItem += OnRetrieveVirtualItem;
         }
 
         /// <summary>
