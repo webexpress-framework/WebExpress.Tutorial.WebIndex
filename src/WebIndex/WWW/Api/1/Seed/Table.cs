@@ -53,7 +53,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Seed
         {
             yield return new RestApiOptionHeader(request)
             {
-                Label = "webexpress.webapp:header.setting.label"
+                Text = "webexpress.webapp:header.setting.label"
             };
 
             yield return new RestApiOptionEdit(request)
