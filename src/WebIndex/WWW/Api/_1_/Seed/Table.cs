@@ -12,15 +12,15 @@ using WebExpress.WebCore.WebUri;
 using WebExpress.WebIndex.Queries;
 using WebExpress.WebUI.WebControl;
 
-namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
+namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
 {
     /// <summary>
-    /// Represents a REST API table for managing catalog entities, providing data retrieval 
+    /// Represents a REST API table for managing seed entities, providing data retrieval 
     /// and option generation functionality for seed records.
     /// </summary>
-    [Title("webexpress.tutorial.webindex:setting.catalog.label")]
+    [Title("webexpress.tutorial.webindex:setting.seed.label")]
     [Cache]
-    public sealed class Table : RestApiTable<CatalogItem>
+    public sealed class Table : RestApiTable<Model.Seed>
     {
         private readonly ISitemapManager _sitemapManager;
         private readonly IRestApiContext _restApiContext;
@@ -34,13 +34,10 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <param name="restApiContext">The rest api context.</param>
         public Table(ISitemapManager sitemapManager, IRestApiContext restApiContext)
         {
-            ArgumentNullException.ThrowIfNull(sitemapManager);
-            ArgumentNullException.ThrowIfNull(restApiContext);
-
             _sitemapManager = sitemapManager;
             _restApiContext = restApiContext;
-            _editFormUri = _sitemapManager.GetUri<WWW.Setting.Catalog.Id.Edit>(_restApiContext.ApplicationContext);
-            _deleteFormUri = _sitemapManager.GetUri<WWW.Setting.Catalog.Id.Delete>(_restApiContext.ApplicationContext);
+            _editFormUri = _sitemapManager.GetUri<WWW.Setting.Seed.Id.Edit>(_restApiContext.ApplicationContext);
+            _deleteFormUri = _sitemapManager.GetUri<WWW.Setting.Seed.Id.Delete>(_restApiContext.ApplicationContext);
         }
 
         /// <summary>
@@ -52,7 +49,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <param name="request">
         /// The request object containing the criteria for retrieving options. Cannot be null.
         /// </param>
-        public override IEnumerable<RestApiOption> GetOptions(CatalogItem row, IRequest request)
+        public override IEnumerable<RestApiOption> GetOptions(Model.Seed row, IRequest request)
         {
             yield return new RestApiOptionHeader(request)
             {
@@ -99,9 +96,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <returns>
         /// An object representing the URI of the REST API endpoint for the given request and workspace.
         /// </returns>
-        public override IUri GetRestApiForInlineEdit(CatalogItem row, IRequest request)
+        public override IUri GetRestApiForInlineEdit(Model.Seed row, IRequest request)
         {
-            return _sitemapManager.GetUri<WWW.Api._1.Catalog.Index>(_restApiContext.ApplicationContext)
+            return _sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(_restApiContext.ApplicationContext)
                 .Add(new UriQuery("id", row.Id.ToString()));
         }
 
@@ -123,9 +120,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// An <see cref="IQueryable{TIndexItem}"/> representing the filtered set of index items. The 
         /// result may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query, IQueryContext context, IRequest request)
+        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query, IQueryContext context, IRequest request)
         {
-            return query.Apply(ViewModel.Catalog.AsQueryable());
+            return query.Apply(ViewModel.Seeds.AsQueryable());
         }
 
         /// <summary>
@@ -142,7 +139,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// The request that provides the operational context for resolving
         /// the appropriate REST API URI.
         /// </param>
-        protected override void Filter(string filter, IQuery<CatalogItem> query, IRequest request)
+        protected override void Filter(string filter, IQuery<Model.Seed> query, IRequest request)
         {
             if (filter is null || filter == "null")
             {

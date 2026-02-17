@@ -26,7 +26,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
             : base(fragmentContext)
         {
             _sitemapManager = sitemapManager;
-            RestUri = _sitemapManager.GetUri<WWW.Api._1.Seed.Table>(fragmentContext.ApplicationContext);
+            RestUri = _sitemapManager.GetUri<WWW.Api._1_.Seed.Table>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>

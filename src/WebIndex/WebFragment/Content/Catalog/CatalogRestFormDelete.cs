@@ -22,7 +22,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
             : base(fragmentContext)
         {
             Mode = TypeRestFormMode.Delete;
-            Uri = sitemapManager.GetUri<WWW.Api._1.Catalog.Index>(fragmentContext.ApplicationContext);
+            Uri = sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>

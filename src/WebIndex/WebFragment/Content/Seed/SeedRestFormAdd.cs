@@ -37,7 +37,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
             Add(Url);
 
             Mode = TypeRestFormMode.Add;
-            Uri = sitemapManager.GetUri<WWW.Api._1.Seed.Index>(fragmentContext.ApplicationContext);
+            Uri = sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
         }
     }
 }

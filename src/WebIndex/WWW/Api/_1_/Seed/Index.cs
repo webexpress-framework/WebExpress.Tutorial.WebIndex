@@ -2,19 +2,18 @@
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
-using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
 using WebExpress.WebIndex.Queries;
 
-namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
+namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
 {
     /// <summary>
-    /// Represents a REST API endpoint for operations on catalog entities.
+    /// Represents a REST API endpoint for operations on seed entities.
     /// </summary>
     [Cache]
-    public sealed class Index : RestApiCrud<CatalogItem>
+    public sealed class Index : RestApiCrud<Model.Seed>
     {
         /// <summary>
         /// Initializes a new instance of the class.
@@ -41,61 +40,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// A collection representing the filtered set of index items. 
         /// The collection may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query, IQueryContext context, IRequest request)
+        protected override IEnumerable<Model.Seed> Retrieve(IQuery<Model.Seed> query, IQueryContext context, IRequest request)
         {
-            return query.Apply(ViewModel.Catalog.AsQueryable());
-        }
-
-        /// <summary>
-        /// Retrieves an item by its identifier for update operations.
-        /// </summary>
-        /// <param name="query">
-        /// An object containing the query parameters used to filter and select index items. Cannot 
-        /// be null.
-        /// </param>
-        /// <param name="request">The request.</param>
-        /// <returns>
-        /// A result instance representing the data and metadata required
-        /// to initialize a new item for creation.
-        /// </returns>
-        protected override IRestApiCrudResultRetrieve RetrieveForUpdate(IQuery<CatalogItem> query, IRequest request)
-        {
-            using var context = CreateContext();
-            var data = Retrieve(query, context, request)
-                .FirstOrDefault();
-
-            return new RestApiCrudResultRetrieve()
-            {
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.edit.header"),
-                Data = data
-            };
-        }
-
-        /// <summary>
-        /// Retrieves the item identified by the specified ID for the purpose of confirming 
-        /// or preparing a delete operation.
-        /// </summary>
-        /// <param name="query">
-        /// An object containing the query parameters used to filter and select index items. Cannot 
-        /// be null.
-        /// </param>
-        /// <param name="request">The request.</param>
-        /// <returns>
-        /// A result instance representing the data and metadata required
-        /// to initialize a new item for creation.
-        /// </returns>
-        protected override IRestApiCrudResultRetrieveDelete RetrieveForDelete(IQuery<CatalogItem> query, IRequest request)
-        {
-            using var context = CreateContext();
-            var data = Retrieve(query, context, request)
-                .FirstOrDefault();
-
-            return new RestApiCrudResultRetrieveDelete()
-            {
-                Data = data,
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.delete.header"),
-                ConfirmItem = data?.Id.ToString()
-            };
+            return query.Apply(ViewModel.Seeds.AsQueryable());
         }
 
         /// <summary>
@@ -116,9 +63,38 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <returns>
         /// An IRestApiValidationResult indicating validation success or errors.
         /// </returns>
-        protected override IRestApiValidationResult Validate(Model.CatalogItem existingItem, RestApiCrudFormData payload, IRequest request)
+        protected override IRestApiValidationResult Validate(Model.Seed existingItem, RestApiCrudFormData payload, IRequest request)
         {
             return base.Validate(existingItem, payload, request);
+        }
+
+        /// <summary>
+        /// Persists the newly created resource.
+        /// Override this method in derived classes to implement the actual
+        /// persistence logic and return a result describing the creation.
+        /// </summary>
+        /// <param name="fieldMap">
+        /// The dynamic payload containing the fields required to create the resource.
+        /// </param>
+        /// <param name="request">
+        /// The HTTP request providing additional context for the creation process.
+        /// </param>
+        /// <param name="newItem">
+        /// When the method returns, contains the newly created index item,
+        /// or the default value if creation was not successful.
+        /// </param>
+        /// <returns>
+        /// A result object containing information about the create operation,
+        /// including the created resource.
+        /// </returns>
+        protected override IRestApiCrudResultCreate Create(RestApiCrudFormData fieldMap, IRequest request, out Model.Seed newItem)
+        {
+            newItem = new Model.Seed();
+            fieldMap.BindTo(newItem);
+
+            ViewModel.AddSeed(newItem);
+
+            return new RestApiCrudResultCreate();
         }
 
         /// <summary>
@@ -133,9 +109,12 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <param name="request">
         /// The HTTP request providing additional context.
         /// </param>
-        protected override IRestApiCrudResultUpdate Update(Model.CatalogItem existingItem, RestApiCrudFormData payload, IRequest request)
+        protected override IRestApiCrudResultUpdate Update(Model.Seed existingItem, RestApiCrudFormData payload, IRequest request)
         {
-            return base.Update(existingItem, payload, request);
+            var res = base.Update(existingItem, payload, request);
+            ViewModel.UpdateSeed(existingItem);
+
+            return res;
         }
 
         /// <summary>
@@ -150,9 +129,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1.Catalog
         /// <returns>
         /// A result object containing information about the delete operation.
         /// </returns>
-        protected override IRestApiCrudResultDelete Delete(Model.CatalogItem existingItem, IRequest request)
+        protected override IRestApiCrudResultDelete Delete(Model.Seed existingItem, IRequest request)
         {
-            ViewModel.DeleteDocument(existingItem.Id);
+            ViewModel.DeleteSeed(existingItem.Id);
 
             return base.Delete(existingItem, request);
         }

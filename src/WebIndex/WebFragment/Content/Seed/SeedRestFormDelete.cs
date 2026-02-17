@@ -26,7 +26,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
             : base(fragmentContext)
         {
             Mode = TypeRestFormMode.Delete;
-            Uri = sitemapManager.GetUri<WWW.Api._1.Seed.Index>(fragmentContext.ApplicationContext);
+            Uri = sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
