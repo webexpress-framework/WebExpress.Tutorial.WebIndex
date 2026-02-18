@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
@@ -139,25 +138,31 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
         /// The request that provides the operational context for resolving
         /// the appropriate REST API URI.
         /// </param>
-        protected override void Filter(string filter, IQuery<Model.Seed> query, IRequest request)
+        /// <returns>
+        /// A query representing the filtered set of items that match the criteria defined by 
+        /// the filter statement.
+        /// </returns>
+        protected override IQuery<Model.Seed> Filter(string filter, IQuery<Model.Seed> query, IRequest request)
         {
             if (filter is null || filter == "null")
             {
-                return;
+                return query;
             }
 
-            query.Where
+            query = query.WhereContainsIgnoreCase
             (
-                x => x.Url.Contains(filter, StringComparison.InvariantCultureIgnoreCase)
+                x => x.Url, filter
             );
 
             if (request.GetParameter<ParameterGuid>() is Parameter category)
             {
-                query.Where
+                query = query.WhereContainsIgnoreCase
                 (
-                    x => x.Url.Contains(category.Value.ToLower(), StringComparison.CurrentCultureIgnoreCase)
+                    x => x.Url, category.Value
                 );
             }
+
+            return query;
         }
     }
 }
