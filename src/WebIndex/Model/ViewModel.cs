@@ -126,7 +126,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <returns>An enumerable that match the search string.</returns>
         public static IEnumerable<CatalogItem> Retrieve(string search)
         {
-            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<CatalogItem>(search)?.Apply().Where(x => x != null);
+            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<CatalogItem>(search)?.Where(x => x != null);
         }
     }
 }

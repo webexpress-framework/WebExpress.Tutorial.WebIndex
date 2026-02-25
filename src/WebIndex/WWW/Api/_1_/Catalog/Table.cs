@@ -72,7 +72,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
                 )
             };
 
-            yield return new RestApiOptionSeperator(request);
+            yield return new RestApiOptionSeparator(request);
             yield return new RestApiOptionDelete(request)
             {
                 PrimaryAction = new ActionModal
