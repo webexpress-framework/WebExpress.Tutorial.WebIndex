@@ -60,7 +60,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
                 PrimaryAction = new ActionModal
                 (
                     "modal-form",
-                    _editFormUri?.SetParameters
+                    _editFormUri?.BindParameters
                     (
                         new ParameterGuid(row.Id)
                     ),
@@ -74,7 +74,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
                 PrimaryAction = new ActionModal
                 (
                     "modal-form",
-                    _deleteFormUri?.SetParameters
+                    _deleteFormUri?.BindParameters
                     (
                         new ParameterGuid(row.Id)
                     ),
