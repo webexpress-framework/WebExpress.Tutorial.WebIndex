@@ -62,7 +62,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
                     "modal-form",
                     _editFormUri?.BindParameters
                     (
-                        new ParameterGuid(row.Id)
+                        new ParameterId(row.Id)
                     ),
                     TypeModalSize.ExtraLarge
                 )
@@ -76,7 +76,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
                     "modal-form",
                     _deleteFormUri?.BindParameters
                     (
-                        new ParameterGuid(row.Id)
+                        new ParameterId(row.Id)
                     ),
                     TypeModalSize.Small
                 )
@@ -154,7 +154,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
                 x => x.Url, filter
             );
 
-            if (request.GetParameter<ParameterGuid>() is Parameter category)
+            if (request.GetParameter<ParameterId>() is IParameterStatic category)
             {
                 query = query.WhereContainsIgnoreCase
                 (

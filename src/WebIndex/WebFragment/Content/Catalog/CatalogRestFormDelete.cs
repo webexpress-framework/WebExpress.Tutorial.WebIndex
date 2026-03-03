@@ -39,7 +39,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         /// </returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            var id = renderContext.Request.GetParameter<ParameterGuid>();
+            var id = renderContext.Request.GetParameter<ParameterId>();
 
             return base.Render(renderContext, visualTree, Items, id.Value.ToString());
         }

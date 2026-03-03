@@ -8,7 +8,7 @@ using WebExpress.WebUI.WebIcon;
 namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Catalog.Id
 {
     [WebIcon<IconGlobe>]
-    [SegmentGuid<ParameterGuid>()]
+    [SegmentGuid<ParameterId>()]
     [Scope<IScopeAdmin>]
     public sealed class Index : IPage<VisualTreeWebApp>, IScopeAdmin
     {

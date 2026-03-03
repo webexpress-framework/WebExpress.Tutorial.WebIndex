@@ -8,7 +8,7 @@ using WebExpress.WebUI.WebIcon;
 namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed.Id
 {
     [WebIcon<IconSeedling>]
-    [SegmentGuid<ParameterGuid>()]
+    [SegmentGuid<ParameterId>()]
     [Scope<IScopeAdmin>]
     public sealed class Index : IPage<VisualTreeWebApp>, IScopeAdmin
     {
