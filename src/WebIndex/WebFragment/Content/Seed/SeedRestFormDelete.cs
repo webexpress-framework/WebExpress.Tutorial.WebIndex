@@ -6,6 +6,7 @@ using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebCore.WebParameter;
 using WebExpress.WebCore.WebSitemap;
+using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebPage;
 
 namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
@@ -41,11 +42,11 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         /// <returns>
         /// An HTML node representing the rendered control.
         /// </returns>
-        public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
+        public override IHtmlNode Render(IRenderControlFormContext renderContext, IVisualTreeControl visualTree)
         {
             var id = renderContext.Request.GetParameter<ParameterId>();
 
-            return base.Render(renderContext, visualTree, Items, id.Value.ToString());
+            return base.Render(renderContext, visualTree, Items, id.Value.ToString(), Uri);
         }
     }
 }
