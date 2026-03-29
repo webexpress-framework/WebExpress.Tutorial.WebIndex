@@ -44,65 +44,33 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
         }
 
         /// <summary>
-        /// Retrieves a collection of options.
+        /// Retrieves the collection of columns available for the specified 
+        /// REST API request.
         /// </summary>
-        /// <param name="row">
-        /// The row object for which options are being retrieved. Cannot be null.
-        /// </param>
         /// <param name="request">
-        /// The request object containing the criteria for retrieving options. Cannot be null.
-        /// </param>
-        public override IEnumerable<RestApiOption> GetOptions(CatalogItem row, IRequest request)
-        {
-            yield return new RestApiOptionHeader(request)
-            {
-                Text = "webexpress.webapp:header.setting.label"
-            };
-
-            yield return new RestApiOptionEdit(request)
-            {
-                PrimaryAction = new ActionModal
-                (
-                    "modal-form",
-                    _editFormUri?.BindParameters
-                    (
-                        new ParameterId(row.Id)
-                    ),
-                    TypeModalSize.ExtraLarge
-                )
-            };
-
-            yield return new RestApiOptionSeparator(request);
-            yield return new RestApiOptionDelete(request)
-            {
-                PrimaryAction = new ActionModal
-                (
-                    "modal-form",
-                    _deleteFormUri?.BindParameters
-                    (
-                        new ParameterId(row.Id)
-                    ),
-                    TypeModalSize.Small
-                )
-            };
-        }
-
-        /// <summary>
-        /// Returns the REST API endpoint URI associated with the specified request and workspace.
-        /// </summary>
-        /// <param name="row">
-        /// The workspace context used to determine the appropriate REST API endpoint.
-        /// </param>
-        /// <param name="request">
-        /// The request for which to retrieve the REST API endpoint.
+        /// The request for which to retrieve the available table columns.
         /// </param>
         /// <returns>
-        /// An object representing the URI of the REST API endpoint for the given request and workspace.
+        /// An enumerable collection of columns describing the structure of 
+        /// the data returned by the REST API for the specified request.
         /// </returns>
-        public override IUri GetRestApiForInlineEdit(CatalogItem row, IRequest request)
+        protected override IEnumerable<RestApiTableColumn> RetrieveColums(IRequest request)
         {
-            return _sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(_restApiContext.ApplicationContext)
-                .Add(new UriQuery("id", row.Id.ToString()));
+            yield return new RestApiTableColumn()
+            {
+                Id = "title",
+                Name = "Title",
+                Label = "Title",
+                Visible = true
+            };
+
+            yield return new RestApiTableColumn()
+            {
+                Id = "url",
+                Name = "Url",
+                Label = "Url",
+                Visible = true
+            };
         }
 
         /// <summary>
@@ -116,6 +84,9 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
         /// The context in which the query is executed. Provides additional information or constraints 
         /// for the retrieval operation. Cannot be null.
         /// </param>
+        /// <param name="columns">
+        /// The collection of columns available for the specified REST API request.
+        /// </param>
         /// <param name="request">
         /// The request that provides the operational context.
         /// </param>
@@ -123,9 +94,26 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
         /// An <see cref="IQueryable{TIndexItem}"/> representing the filtered set of index items. The 
         /// result may be empty if no items match the query.
         /// </returns>
-        protected override IEnumerable<CatalogItem> Retrieve(IQuery<CatalogItem> query, IQueryContext context, IRequest request)
+        protected override IEnumerable<RestApiTableRow> RetrieveRows(IQuery<CatalogItem> query, IQueryContext context, IEnumerable<RestApiTableColumn> columns, IRequest request)
         {
-            return query.Apply(ViewModel.Catalog.AsQueryable());
+            return query.Apply(ViewModel.Catalog.AsQueryable())
+                .Select(x => new RestApiTableRow()
+                {
+                    Id = x.Id.ToString(),
+                    Cells = new[]
+                    {
+                        new RestApiTableCell()
+                        {
+                            Content = x.Title
+                        },
+                        new RestApiTableCell()
+                        {
+                            Content = x.Url
+                        }
+                    },
+                    Options = GetOptions(x.Id.ToString(), request).Select(o => o.ToJson()),
+                    RestApi = GetRestApiForInlineEdit(x.Id.ToString(), request).ToString()
+                });
         }
 
         /// <summary>
@@ -167,6 +155,68 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
             }
 
             return query;
+        }
+
+        /// <summary>
+        /// Retrieves a collection of options.
+        /// </summary>
+        /// <param name="id">
+        /// The id for which options are being retrieved. Cannot be null.
+        /// </param>
+        /// <param name="request">
+        /// The request object containing the criteria for retrieving options. Cannot be null.
+        /// </param>
+        private IEnumerable<RestApiOption> GetOptions(string id, IRequest request)
+        {
+            yield return new RestApiOptionHeader(request)
+            {
+                Text = "webexpress.webapp:header.setting.label"
+            };
+
+            yield return new RestApiOptionEdit(request)
+            {
+                PrimaryAction = new ActionModal
+                (
+                    "modal-form",
+                    _editFormUri?.BindParameters
+                    (
+                        new ParameterId(id)
+                    ),
+                    TypeModalSize.ExtraLarge
+                )
+            };
+
+            yield return new RestApiOptionSeparator(request);
+            yield return new RestApiOptionDelete(request)
+            {
+                PrimaryAction = new ActionModal
+                (
+                    "modal-form",
+                    _deleteFormUri?.BindParameters
+                    (
+                        new ParameterId(id)
+                    ),
+                    TypeModalSize.Small
+                )
+            };
+        }
+
+        /// <summary>
+        /// Returns the REST API endpoint URI associated with the specified request and workspace.
+        /// </summary>
+        /// <param name="id">
+        /// The id to determine the appropriate REST API endpoint.
+        /// </param>
+        /// <param name="request">
+        /// The request for which to retrieve the REST API endpoint.
+        /// </param>
+        /// <returns>
+        /// An object representing the URI of the REST API endpoint for the given request and workspace.
+        /// </returns>
+        private IUri GetRestApiForInlineEdit(string id, IRequest request)
+        {
+            return _sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(_restApiContext.ApplicationContext)
+                .Add(new UriQuery("id", id));
         }
     }
 }
