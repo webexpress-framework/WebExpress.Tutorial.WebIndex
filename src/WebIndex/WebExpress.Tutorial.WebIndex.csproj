@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
-		<Version>0.0.10.0</Version>
-		<AssemblyVersion>0.0.10.0</AssemblyVersion>
+		<Version>0.0.11.0</Version>
+		<AssemblyVersion>0.0.11.0</AssemblyVersion>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/webexpress-framework/WebExpress.Tutorial.WebIndex.git</RepositoryUrl>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
@@ -26,7 +26,7 @@
 
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
 	  <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-	  <PackageReference Include="WebExpress.WebApp" Version="0.0.10-alpha" />
+	  <PackageReference Include="WebExpress.WebApp" Version="0.0.11-alpha" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' == 'DebugLocal'">
