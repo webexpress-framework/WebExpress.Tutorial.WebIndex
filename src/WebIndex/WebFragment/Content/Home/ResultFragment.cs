@@ -23,7 +23,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     public sealed class ResultFragment : FragmentControlPanelFlex
     {
         /// <summary>
-        /// Returns the list control for displaying search results.
+        /// Gets the list control for displaying search results.
         /// </summary>
         public ControlText Counter { get; } = new ControlText()
         {
@@ -38,7 +38,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         };
 
         /// <summary>
-        /// Returns the list control for displaying search results.
+        /// Gets the list control for displaying search results.
         /// </summary>
         public ControlList List { get; } = new ControlList()
         {
@@ -52,7 +52,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         };
 
         /// <summary>
-        /// Returns the pagination control for navigating through search results.
+        /// Gets the pagination control for navigating through search results.
         /// </summary>
         public ControlPagination Pagination { get; } = new ControlPagination()
         {

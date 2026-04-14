@@ -17,7 +17,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Returns or sets the URL of the webpage.
+        /// Gets or sets the URL of the webpage.
         /// </summary>
         [IndexDefaultSearch]
         public string Url { get; set; }

@@ -17,7 +17,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     public sealed class SearchFragment : FragmentControlPanelFlex
     {
         /// <summary>
-        /// Returns the control image for the home content fragment.
+        /// Gets the control image for the home content fragment.
         /// </summary>
         private ControlImage Image { get; } = new ControlImage()
         {
@@ -27,7 +27,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         };
 
         /// <summary>
-        /// Returns the search formular.
+        /// Gets the search formular.
         /// </summary>
         public ControlForm Form { get; } = new SearchForm()
         {

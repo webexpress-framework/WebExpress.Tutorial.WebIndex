@@ -19,7 +19,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
     public sealed class SeedRestFormEdit : FragmentControlRestFormEdit
     {
         /// <summary>
-        /// Returns the control element for entering the login identifier.
+        /// Gets the control element for entering the login identifier.
         /// </summary>
         public ControlFormItemInputText Url { get; } = new ControlFormItemInputText()
         {

@@ -17,23 +17,23 @@ namespace WebExpress.Tutorial.WebIndex.Model
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Returns or sets the URL of the webpage.
+        /// Gets or sets the URL of the webpage.
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// Returns or sets the title of the webpage.
+        /// Gets or sets the title of the webpage.
         /// </summary>
         [IndexDefaultSearch]
         public string Title { get; set; }
 
         /// <summary>
-        /// Returns or sets the content of the webpage.
+        /// Gets or sets the content of the webpage.
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Returns or sets the metadata of the webpage.
+        /// Gets or sets the metadata of the webpage.
         /// </summary>
         public MetaData MetaData { get; set; }
     }

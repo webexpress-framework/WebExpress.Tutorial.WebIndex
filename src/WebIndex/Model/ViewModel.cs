@@ -20,12 +20,12 @@ namespace WebExpress.Tutorial.WebIndex.Model
         private static IndexManager _indexManager;
 
         /// <summary>
-        /// Returns all seeds.
+        /// Gets all seeds.
         /// </summary>
         public static IEnumerable<Seed> Seeds => _indexManager.All<Seed>();
 
         /// <summary>
-        /// Returns the catalog items.
+        /// Gets the catalog items.
         /// </summary>
         public static IEnumerable<CatalogItem> Catalog => _indexManager.All<CatalogItem>();
 

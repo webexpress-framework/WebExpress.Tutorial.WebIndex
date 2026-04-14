@@ -18,7 +18,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     public class CatalogFormAdd : FragmentControlRestFormAdd
     {
         /// <summary>
-        /// Returns or sets the uir associated with the object.
+        /// Gets or sets the uir associated with the object.
         /// </summary>
         public ControlFormItemInputText ItemUri { get; } = new ControlFormItemInputText
         {
@@ -32,7 +32,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         };
 
         /// <summary>
-        /// Returns or sets the title associated with the object.
+        /// Gets or sets the title associated with the object.
         /// </summary>
         public ControlFormItemInputText Title { get; } = new ControlFormItemInputText
         {
