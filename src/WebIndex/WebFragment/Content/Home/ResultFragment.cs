@@ -101,47 +101,48 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
             Counter.Text = I18N.Translate(e.RenderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
             e.Items = res.Select
             (
-                x => new ControlListItem
-                (
-                    null,
-                    new ControlText()
-                    {
-                        Text = x?.Title,
-                        Format = TypeFormatText.H5,
-                        TextColor = new PropertyColorText(TypeColorText.Primary)
-                    },
-                    new ControlText()
-                    {
-                        Text = x?.Content.Length > 1000
-                            ? string.Concat(x.Content.AsSpan(0, 1000), "...")
-                            : x?.Content,
-                        Format = TypeFormatText.Paragraph,
-                        TextColor = new PropertyColorText(TypeColorText.Dark),
-                        Margin = new PropertySpacingMargin
-                        (
-                            PropertySpacing.Space.Two,
-                            PropertySpacing.Space.Null
-                        )
-                    },
-                    new ControlLink()
-                    {
-                        Text = new UriEndpoint(x?.Url),
-                        Uri = new UriEndpoint(x?.Url),
-                        TextColor = new PropertyColorText(TypeColorText.Secondary),
-                        Margin = new PropertySpacingMargin
-                        (
-                            PropertySpacing.Space.Two,
-                            PropertySpacing.Space.Null
-                        )
-                    }
-                )
-                {
-                    Margin = new PropertySpacingMargin
+                x => (ControlListItem)new ControlListItem()
+                    .Add
                     (
-                        PropertySpacing.Space.Null,
-                        PropertySpacing.Space.Two
+                        null,
+                        new ControlText()
+                        {
+                            Text = x?.Title,
+                            Format = TypeFormatText.H5,
+                            TextColor = new PropertyColorText(TypeColorText.Primary)
+                        },
+                        new ControlText()
+                        {
+                            Text = x?.Content.Length > 1000
+                                ? string.Concat(x.Content.AsSpan(0, 1000), "...")
+                                : x?.Content,
+                            Format = TypeFormatText.Paragraph,
+                            TextColor = new PropertyColorText(TypeColorText.Dark),
+                            Margin = new PropertySpacingMargin
+                            (
+                                PropertySpacing.Space.Two,
+                                PropertySpacing.Space.Null
+                            )
+                        },
+                        new ControlLink()
+                        {
+                            Text = new UriEndpoint(x?.Url),
+                            Uri = new UriEndpoint(x?.Url),
+                            TextColor = new PropertyColorText(TypeColorText.Secondary),
+                            Margin = new PropertySpacingMargin
+                            (
+                                PropertySpacing.Space.Two,
+                                PropertySpacing.Space.Null
+                            )
+                        }
                     )
-                }
+                //{
+                //    Margin = new PropertySpacingMargin
+                //    (
+                //        PropertySpacing.Space.Null,
+                //        PropertySpacing.Space.Two
+                //    )
+                //}
             );
         }
 
