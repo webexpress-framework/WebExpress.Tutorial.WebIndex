@@ -30,7 +30,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         {
             Text = (c) => "webexpress.tutorial.webindex:add.label";
             Margin = _ => new PropertySpacingMargin(PropertySpacing.Space.Two);
-            BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
+            BackgroundColor = _ => new PropertyColorButton(TypeColorButton.Primary);
             Icon = _ => new IconPlus();
             PrimaryAction = _ => new ActionModal
             (

@@ -32,9 +32,9 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.AppNavigation
         public HomeLink(IComponentHub componentHub, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:homepage.label";
-            Uri = componentHub.SitemapManager.GetUri<Index>(fragmentContext.ApplicationContext);
-            Icon = new IconHome();
+            Text = _ => "webexpress.tutorial.webindex:homepage.label";
+            Uri = _ => componentHub.SitemapManager.GetUri<Index>(fragmentContext.ApplicationContext);
+            Icon = _ => new IconHome();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.AppNavigation
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
-            Active = renderContext.Endpoint is Index ? TypeActive.Active : TypeActive.None;
+            Active = _ => renderContext.Endpoint is Index ? TypeActive.Active : TypeActive.None;
 
             return base.Render(renderContext, visualTree);
         }

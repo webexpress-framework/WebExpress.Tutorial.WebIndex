@@ -126,8 +126,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                         },
                         new ControlLink()
                         {
-                            Text = new UriEndpoint(x?.Url),
-                            Uri = new UriEndpoint(x?.Url),
+                            Text = _ => new UriEndpoint(x?.Url),
+                            Uri = _ => new UriEndpoint(x?.Url),
                             TextColor = _ => new PropertyColorText(TypeColorText.Secondary),
                             Margin = _ => new PropertySpacingMargin
                             (
