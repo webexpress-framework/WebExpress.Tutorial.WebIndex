@@ -128,7 +128,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                         {
                             Text = new UriEndpoint(x?.Url),
                             Uri = new UriEndpoint(x?.Url),
-                            TextColor = new PropertyColorText(TypeColorText.Secondary),
+                            TextColor = _ => new PropertyColorText(TypeColorText.Secondary),
                             Margin = new PropertySpacingMargin
                             (
                                 PropertySpacing.Space.Two,
