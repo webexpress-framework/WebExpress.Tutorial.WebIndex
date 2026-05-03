@@ -23,7 +23,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         {
             Width = 400,
             Classes = ["rounded"],
-            Margin = new PropertySpacingMargin(PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.Two)
+            Margin = _ => new PropertySpacingMargin(PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.Two)
         };
 
         /// <summary>

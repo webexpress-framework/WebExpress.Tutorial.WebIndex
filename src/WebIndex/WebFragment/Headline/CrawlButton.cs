@@ -23,12 +23,12 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         public CrawlButton(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
+            Margin = _ => new PropertySpacingMargin(PropertySpacing.Space.Two);
 
             AddPrimaryButton(new ControlFormItemButtonSubmit()
             {
                 Text = "webexpress.tutorial.webindex:run.label",
-                BackgroundColor = new PropertyColorBackground(TypeColorBackground.Success),
+                BackgroundColor = _ => new PropertyColorBackground(TypeColorBackground.Success),
                 Icon = new IconPlayCircle()
             });
 

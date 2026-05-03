@@ -27,7 +27,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         public ControlText Counter { get; } = new ControlText()
         {
-            Margin = new PropertySpacingMargin
+            Margin = _ => new PropertySpacingMargin
             (
                 PropertySpacing.Space.Two,
                 PropertySpacing.Space.Auto,
@@ -42,7 +42,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         public ControlList List { get; } = new ControlList()
         {
-            Margin = new PropertySpacingMargin
+            Margin = _ => new PropertySpacingMargin
             (
                 PropertySpacing.Space.Two,
                 PropertySpacing.Space.Auto,
@@ -56,7 +56,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         public ControlPagination Pagination { get; } = new ControlPagination()
         {
-            Margin = new PropertySpacingMargin
+            Margin = _ => new PropertySpacingMargin
             (
                 PropertySpacing.Space.Two,
                 PropertySpacing.Space.Auto,
@@ -118,7 +118,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                                 : x?.Content,
                             Format = TypeFormatText.Paragraph,
                             TextColor = new PropertyColorText(TypeColorText.Dark),
-                            Margin = new PropertySpacingMargin
+                            Margin = _ => new PropertySpacingMargin
                             (
                                 PropertySpacing.Space.Two,
                                 PropertySpacing.Space.Null
@@ -129,7 +129,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                             Text = new UriEndpoint(x?.Url),
                             Uri = new UriEndpoint(x?.Url),
                             TextColor = _ => new PropertyColorText(TypeColorText.Secondary),
-                            Margin = new PropertySpacingMargin
+                            Margin = _ => new PropertySpacingMargin
                             (
                                 PropertySpacing.Space.Two,
                                 PropertySpacing.Space.Null
