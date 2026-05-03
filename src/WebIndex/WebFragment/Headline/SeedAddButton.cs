@@ -28,7 +28,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         public SeedAddButton(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:add.label";
+            Text = (c) => "webexpress.tutorial.webindex:add.label";
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
             Icon = new IconPlus();
