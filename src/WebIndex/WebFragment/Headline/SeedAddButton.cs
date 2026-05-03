@@ -31,8 +31,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
             Text = (c) => "webexpress.tutorial.webindex:add.label";
             Margin = new PropertySpacingMargin(PropertySpacing.Space.Two);
             BackgroundColor = new PropertyColorButton(TypeColorButton.Primary);
-            Icon = new IconPlus();
-            PrimaryAction = new ActionModal
+            Icon = _ => new IconPlus();
+            PrimaryAction = _ => new ActionModal
             (
                 "modal-form",
                 sitemapManager.GetUri<WWW.Setting.Seed.Add>(fragmentContext.ApplicationContext),
