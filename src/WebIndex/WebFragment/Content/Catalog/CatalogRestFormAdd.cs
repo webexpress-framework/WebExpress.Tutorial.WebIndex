@@ -22,13 +22,13 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         /// </summary>
         public ControlFormItemInputText ItemUri { get; } = new ControlFormItemInputText
         {
-            Label = "Uri",
-            Name = nameof(Model.CatalogItem.Url),
+            Label = _ => "Uri",
+            Name = _ => nameof(Model.CatalogItem.Url),
             Placeholder = "Enter the uri of the index item.",
-            Required = true,
+            Required = _ => true,
             MaxLength = 100,
-            Icon = new IconCopy(),
-            Help = "The URI of the index item. This is a required field and should be unique."
+            Icon = _ => new IconCopy(),
+            Help = _ => "The URI of the index item. This is a required field and should be unique."
         };
 
         /// <summary>
@@ -36,13 +36,13 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         /// </summary>
         public ControlFormItemInputText Title { get; } = new ControlFormItemInputText
         {
-            Label = "Title",
-            Name = nameof(Model.CatalogItem.Title),
+            Label = _ => "Title",
+            Name = _ => nameof(Model.CatalogItem.Title),
             Format = TypeEditTextFormat.Wysiwyg,
             Placeholder = "Enter a brief description of the index item",
-            Required = true,
+            Required = _ => true,
             MaxLength = 500,
-            Help = "A brief description of the index item. This field is required and can include details about the item’s purpose, content, or context."
+            Help = _ => "A brief description of the index item. This field is required and can include details about the item’s purpose, content, or context."
         };
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
             Add(ItemUri);
             Add(Title);
 
-            Mode = TypeRestFormMode.Add;
-            Uri = sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
+            Mode = _ => TypeRestFormMode.Add;
+            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
         }
     }
 }

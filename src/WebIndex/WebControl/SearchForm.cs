@@ -15,12 +15,12 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
         public SearchForm()
             : base("searchform")
         {
-            FormLayout = TypeLayoutForm.Inline;
-            Method = RequestMethod.GET;
+            FormLayout = _ => TypeLayoutForm.Inline;
+            Method = _ => RequestMethod.GET;
 
             Add(new ControlFormItemInputText()
             {
-                Name = "search",
+                Name = _ => "search",
                 Placeholder = "webexpress.tutorial.webindex:search.placeholder",
                 Styles = ["width: 30rem;"]
             });

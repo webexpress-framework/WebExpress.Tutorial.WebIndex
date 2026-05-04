@@ -31,7 +31,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         public ControlForm Form { get; } = new SearchForm()
         {
-            Justify = TypeJustifiedFlex.Center
+            Justify = _ => TypeJustifiedFlex.Center
         };
 
         /// <summary>

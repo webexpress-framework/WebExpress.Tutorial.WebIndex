@@ -22,8 +22,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         public CatalogFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Mode = TypeRestFormMode.Delete;
-            Uri = sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
+            Mode = _ => TypeRestFormMode.Delete;
+            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         {
             var id = renderContext.Request.GetParameter<ParameterId>();
 
-            return base.Render(renderContext, visualTree, Items, id.Value.ToString(), Uri);
+            return base.Render(renderContext, visualTree);
         }
     }
 }

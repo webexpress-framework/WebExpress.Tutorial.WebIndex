@@ -26,8 +26,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         public SeedRestFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Mode = TypeRestFormMode.Delete;
-            Uri = sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
+            Mode = _ => TypeRestFormMode.Delete;
+            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             var id = renderContext.Request.GetParameter<ParameterId>();
 
-            return base.Render(renderContext, visualTree, Items, id.Value.ToString(), Uri);
+            return base.Render(renderContext, visualTree);
         }
     }
 }

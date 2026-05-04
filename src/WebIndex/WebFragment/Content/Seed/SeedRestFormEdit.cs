@@ -23,10 +23,10 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         /// </summary>
         public ControlFormItemInputText Url { get; } = new ControlFormItemInputText()
         {
-            Name = nameof(Model.Seed.Url),
-            Label = "webexpress.tutorial.webindex:setting.seed.add.label",
+            Name = _ => nameof(Model.Seed.Url),
+            Label = _ => "webexpress.tutorial.webindex:setting.seed.add.label",
             Placeholder = "webexpress.tutorial.webindex:setting.seed.add.placeholder",
-            Help = "webexpress.tutorial.webindex:setting.seed.add.help"
+            Help = _ => "webexpress.tutorial.webindex:setting.seed.add.help"
         };
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             Add(Url);
 
-            Mode = TypeRestFormMode.Edit;
-            Uri = sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
+            Mode = _ => TypeRestFormMode.Edit;
+            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             var id = renderContext.Request.GetParameter<ParameterId>();
 
-            return base.Render(renderContext, visualTree, Items, id.Value.ToString(), Uri);
+            return base.Render(renderContext, visualTree);
         }
     }
 }
