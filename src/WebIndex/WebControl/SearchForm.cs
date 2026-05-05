@@ -21,14 +21,14 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
             Add(new ControlFormItemInputText()
             {
                 Name = _ => "search",
-                Placeholder = "webexpress.tutorial.webindex:search.placeholder",
+                Placeholder = _ => "webexpress.tutorial.webindex:search.placeholder",
                 Styles = ["width: 30rem;"]
             });
 
             AddPrimaryButton(new ControlFormItemButtonSubmit()
             {
-                Text = "webexpress.tutorial.webindex:search.label",
-                Icon = new IconPaperPlane()
+                Text = _ => "webexpress.tutorial.webindex:search.label",
+                Icon = _ => new IconPaperPlane()
             });
         }
     }

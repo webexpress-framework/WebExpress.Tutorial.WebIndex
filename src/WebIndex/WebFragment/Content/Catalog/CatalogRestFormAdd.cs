@@ -24,9 +24,9 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         {
             Label = _ => "Uri",
             Name = _ => nameof(Model.CatalogItem.Url),
-            Placeholder = "Enter the uri of the index item.",
+            Placeholder = _ => "Enter the uri of the index item.",
             Required = _ => true,
-            MaxLength = 100,
+            MaxLength = _ => 100,
             Icon = _ => new IconCopy(),
             Help = _ => "The URI of the index item. This is a required field and should be unique."
         };
@@ -38,10 +38,10 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         {
             Label = _ => "Title",
             Name = _ => nameof(Model.CatalogItem.Title),
-            Format = TypeEditTextFormat.Wysiwyg,
-            Placeholder = "Enter a brief description of the index item",
+            Format = _ => TypeEditTextFormat.Wysiwyg,
+            Placeholder = _ => "_ => Enter a brief description of the index item",
             Required = _ => true,
-            MaxLength = 500,
+            MaxLength = _ => 500,
             Help = _ => "A brief description of the index item. This field is required and can include details about the item’s purpose, content, or context."
         };
 

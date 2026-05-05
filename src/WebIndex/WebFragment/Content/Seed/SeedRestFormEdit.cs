@@ -25,7 +25,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             Name = _ => nameof(Model.Seed.Url),
             Label = _ => "webexpress.tutorial.webindex:setting.seed.add.label",
-            Placeholder = "webexpress.tutorial.webindex:setting.seed.add.placeholder",
+            Placeholder = _ => "webexpress.tutorial.webindex:setting.seed.add.placeholder",
             Help = _ => "webexpress.tutorial.webindex:setting.seed.add.help"
         };
 

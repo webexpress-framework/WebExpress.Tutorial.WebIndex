@@ -27,9 +27,9 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
 
             AddPrimaryButton(new ControlFormItemButtonSubmit()
             {
-                Text = "webexpress.tutorial.webindex:run.label",
+                Text = _ => "webexpress.tutorial.webindex:run.label",
                 BackgroundColor = _ => new PropertyColorBackground(TypeColorBackground.Success),
-                Icon = new IconPlayCircle()
+                Icon = _ => new IconPlayCircle()
             });
 
             ProcessForm += OnProcessForm;
