@@ -35,11 +35,11 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Headline
         public CatalogClearButton(IComponentHub componentHub, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:setting.catalog.clear.label";
+            Text = _ => "webexpress.tutorial.webindex:setting.catalog.clear.label";
             //Uri = componentHub.SitemapManager.GetUri<Catalog>(fragmentContext.ApplicationContext);
-            Color = TypeColorText.Danger;
-            Icon = new IconTrash();
-            PrimaryAction = new ActionModal(DeleteModal.Id);
+            Color = _ => TypeColorText.Danger;
+            Icon = _ => new IconTrash();
+            PrimaryAction = _ => new ActionModal(DeleteModal.Id);
 
             DeleteModal.Confirm += OnDeleteModalConfirm;
         }
