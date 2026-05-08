@@ -27,8 +27,8 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         public CatalogDescription(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Text = "webexpress.tutorial.webindex:setting.catalog.description";
-            Format = TypeFormatText.Markdown;
+            Text = _ => "webexpress.tutorial.webindex:setting.catalog.description";
+            Format = _ => TypeFormatText.Markdown;
         }
 
         /// <summary>

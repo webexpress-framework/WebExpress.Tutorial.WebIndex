@@ -21,7 +21,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// </summary>
         private ControlImage Image { get; } = new ControlImage()
         {
-            Width = 400,
+            Width = _ => 400,
             Classes = ["rounded"],
             Margin = _ => new PropertySpacingMargin(PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.None, PropertySpacing.Space.Two)
         };
@@ -41,15 +41,15 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         public SearchFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Layout = TypeLayoutFlex.Default;
-            Align = TypeAlignFlex.Center;
-            Justify = TypeJustifiedFlex.Center;
-            Direction = TypeDirection.Vertical;
+            Layout = _ => TypeLayoutFlex.Default;
+            Align = _ => TypeAlignFlex.Center;
+            Justify = _ => TypeJustifiedFlex.Center;
+            Direction = _ => TypeDirection.Vertical;
 
             Add(Image);
             Add(Form);
 
-            Image.Uri = fragmentContext.ApplicationContext.Route
+            Image.Uri = _ => fragmentContext.ApplicationContext.Route
                 .Concat("/assets/img/webindexlogo.png")
                 ?.ToUri();
         }

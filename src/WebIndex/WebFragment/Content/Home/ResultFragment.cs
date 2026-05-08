@@ -34,7 +34,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                 PropertySpacing.Space.Two,
                 PropertySpacing.Space.None
             ),
-            Format = TypeFormatText.H4
+            Format = _ => TypeFormatText.H4
         };
 
         /// <summary>
@@ -72,10 +72,10 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         public ResultFragment(IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Layout = TypeLayoutFlex.Default;
-            Align = TypeAlignFlex.Center;
-            Justify = TypeJustifiedFlex.Center;
-            Direction = TypeDirection.Vertical;
+            Layout = _ => TypeLayoutFlex.Default;
+            Align = _ => TypeAlignFlex.Center;
+            Justify = _ => TypeJustifiedFlex.Center;
+            Direction = _ => TypeDirection.Vertical;
 
             Add(Counter);
             Add(List);
@@ -98,7 +98,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
 
             var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'");
 
-            Counter.Text = I18N.Translate(e.RenderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
+            Counter.Text = _ => I18N.Translate(e.RenderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
             e.Items = res.Select
             (
                 x => (ControlListItem)new ControlListItem()
@@ -107,17 +107,17 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                         null,
                         new ControlText()
                         {
-                            Text = x?.Title,
-                            Format = TypeFormatText.H5,
-                            TextColor = new PropertyColorText(TypeColorText.Primary)
+                            Text = _ => x?.Title,
+                            Format = _ => TypeFormatText.H5,
+                            TextColor = _ => new PropertyColorText(TypeColorText.Primary)
                         },
                         new ControlText()
                         {
-                            Text = x?.Content.Length > 1000
+                            Text = _ => x?.Content.Length > 1000
                                 ? string.Concat(x.Content.AsSpan(0, 1000), "...")
                                 : x?.Content,
-                            Format = TypeFormatText.Paragraph,
-                            TextColor = new PropertyColorText(TypeColorText.Dark),
+                            Format = _ => TypeFormatText.Paragraph,
+                            TextColor = _ => new PropertyColorText(TypeColorText.Dark),
                             Margin = _ => new PropertySpacingMargin
                             (
                                 PropertySpacing.Space.Two,
@@ -157,7 +157,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
             var param = renderContext.Request.GetParameter("search");
             var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'");
 
-            Counter.Text = I18N.Translate(renderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
+            Counter.Text = _ => I18N.Translate(renderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
 
             return base.Render(renderContext, visualTree);
         }
