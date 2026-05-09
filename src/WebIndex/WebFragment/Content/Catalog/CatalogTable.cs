@@ -26,7 +26,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         public CatalogTable(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            RestUri = sitemapManager.GetUri<WWW.Api._1_.Catalog.Table>(fragmentContext.ApplicationContext);
+            RestUri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Table>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>
