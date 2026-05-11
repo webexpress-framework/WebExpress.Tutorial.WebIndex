@@ -1,5 +1,4 @@
-﻿using WebExpress.WebApp.WebControl;
-using WebExpress.WebApp.WebFragment;
+﻿using WebExpress.WebApp.WebFragment;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebCore.WebParameter;
@@ -22,7 +21,6 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         public CatalogFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Mode = _ => TypeRestFormMode.Delete;
             Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
         }
 

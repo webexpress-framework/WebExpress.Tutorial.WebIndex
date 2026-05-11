@@ -1,5 +1,4 @@
-﻿using WebExpress.WebApp.WebControl;
-using WebExpress.WebApp.WebFragment;
+﻿using WebExpress.WebApp.WebFragment;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
@@ -39,7 +38,6 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             Add(Url);
 
-            Mode = _ => TypeRestFormMode.Edit;
             Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
         }
 

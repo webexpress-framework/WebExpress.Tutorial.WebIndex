@@ -2,7 +2,6 @@
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
-using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebRestApi;
@@ -66,7 +65,6 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
 
             return new RestApiCrudResultRetrieve()
             {
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.edit.header"),
                 Data = data
             };
         }
@@ -93,7 +91,6 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Catalog
             return new RestApiCrudResultRetrieveDelete()
             {
                 Data = data,
-                Title = I18N.Translate(request, "webexpress.tutorial.webindex:setting.catalog.delete.header"),
                 ConfirmItem = data?.Id.ToString()
             };
         }
