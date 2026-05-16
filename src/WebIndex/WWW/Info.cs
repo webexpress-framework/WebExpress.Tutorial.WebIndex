@@ -32,8 +32,8 @@ namespace WebExpress.Tutorial.WebIndex.WWW
         /// <param name="visualTree">The visual tree of the web application.</param>
         public void Process(IRenderContext renderContext, VisualTreeWebApp visualTree)
         {
-            var webexpress = WebEx.ComponentHub.PluginManager.Plugins.Where(x => x.PluginId.ToString() == "webexpress.webapp").FirstOrDefault();
-            var webindex = WebEx.ComponentHub.PluginManager.Plugins.Where(x => x.Assembly == GetType().Assembly).FirstOrDefault();
+            var webexpress = WebEx.ComponentHub.PluginManager?.Plugins.Where(x => x.PluginId.ToString() == "webexpress.webapp").FirstOrDefault();
+            var webindex = WebEx.ComponentHub.PluginManager?.Plugins.Where(x => x.Assembly == GetType().Assembly).FirstOrDefault();
 
             visualTree.Content.MainPanel.AddPrimary(new ControlImage()
             {
