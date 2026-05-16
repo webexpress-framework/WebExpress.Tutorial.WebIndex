@@ -37,7 +37,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         public static void Initialization(IComponentHub componentHub, IApplicationContext applicationContext)
         {
             _componentHub = componentHub;
-            _indexManager = _componentHub.GetComponentManager<IndexManager>();
+            _indexManager = _componentHub?.GetComponentManager<IndexManager>();
 
             // indexing the data
             _indexManager.Create<Seed>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
@@ -59,9 +59,9 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="context"> The render context containing the request information.</param>
         public static void ClearCatalog(IRenderContext context)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Clear<CatalogItem>();
+            _componentHub?.GetComponentManager<IndexManager>()?.Clear<CatalogItem>();
 
-            _componentHub.GetComponentManager<NotificationManager>()?.AddNotification
+            _componentHub?.GetComponentManager<NotificationManager>()?.AddNotification
             (
                 applicationContext: context?.PageContext?.ApplicationContext,
                 message: I18N.Translate(context, "webexpress.tutorial.webindex:setting.catalog.cleared"),
@@ -76,7 +76,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="seed">The initial seed uri to add to the index.</param>
         public static void AddSeed(Seed seed)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Insert(seed);
+            _componentHub?.GetComponentManager<IndexManager>()?.Insert(seed);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="seed">The seed to be updated. Cannot be null.</param>
         public static void UpdateSeed(Seed seed)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Update(seed);
+            _componentHub?.GetComponentManager<IndexManager>()?.Update(seed);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// </param>
         public static void DeleteSeed(Guid id)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.Seed>(id);
+            _componentHub?.GetComponentManager<IndexManager>()?.Delete<Model.Seed>(id);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="document">The document to be updated. Cannot be null.</param>
         public static void UpdateDocument(CatalogItem document)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Update(document);
+            _componentHub?.GetComponentManager<IndexManager>()?.Update(document);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// </param>
         public static void DeleteDocument(Guid id)
         {
-            _componentHub.GetComponentManager<IndexManager>()?.Delete<Model.CatalogItem>(id);
+            _componentHub?.GetComponentManager<IndexManager>()?.Delete<Model.CatalogItem>(id);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <returns>An enumerable that match the search string.</returns>
         public static IEnumerable<CatalogItem> Retrieve(string search)
         {
-            return _componentHub.GetComponentManager<IndexManager>()?.Retrieve<CatalogItem>(search)?.Where(x => x is not null);
+            return _componentHub?.GetComponentManager<IndexManager>()?.Retrieve<CatalogItem>(search)?.Where(x => x is not null);
         }
     }
 }
