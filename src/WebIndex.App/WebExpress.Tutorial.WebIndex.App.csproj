@@ -2,16 +2,16 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net9.0</TargetFramework>
-		<Version>0.0.9.0</Version>
-		<AssemblyVersion>0.0.9.0</AssemblyVersion>
+		<TargetFramework>net10.0</TargetFramework>
+		<Version>0.0.11.0</Version>
+		<AssemblyVersion>0.0.11.0</AssemblyVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
-		<PackageReference Include="WebExpress.WebApp" Version="0.0.9-alpha" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+		<PackageReference Include="WebExpress.WebApp" Version="0.0.11-alpha" />
 	</ItemGroup>
 
 	<ItemGroup>
