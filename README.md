@@ -1,7 +1,7 @@
 ![WebExpress-Framework](https://raw.githubusercontent.com/webexpress-framework/.github/main/docs/assets/img/banner.png)
 
 # WebExpress
-`WebExpress` is a lightweight web server optimized for use in low-performance environments (e.g. Rasperry PI). By providing 
+`WebExpress` is a lightweight web server optimized for use in low-performance environments (e.g. Raspberry Pi). By providing 
 a powerful plugin system and a comprehensive API, web applications can be easily and quickly integrated into a .net 
 language (e.g. C#). Some advantages of `WebExpress` are:
 
@@ -22,8 +22,8 @@ The `WebExpress` family includes the following projects:
 
 To get started with `WebExpress`, use the following links.
 
-- [installation guide](https://github.com/webexpress-framework/WebExpress/blob/main/doc/installation_guide.md) 
-- [development guide](https://github.com/webexpress-framework/WebExpress/blob/main/doc/development_guide.md)
+- [installation guide](https://github.com/webexpress-framework/WebExpress/blob/main/docs/installation_guide.md) 
+- [development guide](https://github.com/webexpress-framework/WebExpress/blob/main/docs/development_guide.md)
 
 # Tutorial
 A tutorial to demonstrate the `WebIndex`. The tutorial discusses and explains how to use the `WebIndex` and `WebExpress` jobs.
