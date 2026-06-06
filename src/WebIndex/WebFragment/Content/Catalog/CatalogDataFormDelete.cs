@@ -1,6 +1,4 @@
 ﻿using WebExpress.WebApp.WebFragment;
-using WebExpress.WebApp.WebSection;
-using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
 using WebExpress.WebCore.WebHtml;
 using WebExpress.WebCore.WebParameter;
@@ -8,24 +6,22 @@ using WebExpress.WebCore.WebSitemap;
 using WebExpress.WebUI.WebControl;
 using WebExpress.WebUI.WebPage;
 
-namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
+namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
 {
     /// <summary>
-    /// Represents a edit form control for the initial page settings.
+    /// Represents a form for deleting a catalog index item.
     /// </summary>
-    [Section<SectionContentPreferences>]
-    [Scope<WWW.Setting.Seed.Id.Delete>]
-    public sealed class SeedRestFormDelete : FragmentControlRestFormDelete
+    public class CatalogFormDelete : FragmentControlDataFormDelete
     {
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="sitemapManager">The sitemap manager.</param>
         /// <param name="fragmentContext">The context of the fragment.</param>
-        public SeedRestFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
+        public CatalogFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
+            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Index>(fragmentContext.ApplicationContext);
         }
 
         /// <summary>

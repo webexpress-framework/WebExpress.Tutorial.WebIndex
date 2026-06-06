@@ -1,4 +1,6 @@
-﻿using WebExpress.WebApp.WebFragment;
+﻿using System.Net.Http;
+using WebExpress.WebApp.WebData;
+using WebExpress.WebApp.WebFragment;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
@@ -13,7 +15,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
     /// </summary>
     [Section<SectionContentPrimary>]
     [Scope<WWW.Setting.Seed.Index>]
-    public sealed class SeedTable : FragmentControlRestTable
+    public sealed class SeedTable : FragmentControlDataTable
     {
         private readonly ISitemapManager _sitemapManager;
 
@@ -26,7 +28,22 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
             : base(fragmentContext)
         {
             _sitemapManager = sitemapManager;
-            RestUri = _ => _sitemapManager.GetUri<WWW.Api._1_.Seed.Table>(fragmentContext.ApplicationContext);
+
+            ServiceFactory = rennderContext => new DataServiceBuilder("data")
+                .Endpoint<WWW.Api._1_.Seed.Table>()
+                .Method(HttpMethod.Get)
+                .Query(q => q
+                    .Map("search", "q")
+                    .Map("wql", "wql")
+                    .Map("filter", "f")
+                    .Map("page", "p")
+                    .Map("pageSize", "l")
+                    .Map("orderBy", "o")
+                    .Map("orderDir", "d"))
+                .Response(r => r
+                    .Items("items")
+                    .Total("total"))
+                .Build(rennderContext);
         }
 
         /// <summary>

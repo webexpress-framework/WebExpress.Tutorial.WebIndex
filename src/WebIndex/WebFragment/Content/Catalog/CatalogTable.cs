@@ -1,4 +1,6 @@
-﻿using WebExpress.WebApp.WebFragment;
+﻿using System.Net.Http;
+using WebExpress.WebApp.WebData;
+using WebExpress.WebApp.WebFragment;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
@@ -16,7 +18,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     /// </remarks>
     [Section<SectionContentPrimary>]
     [Scope<WWW.Setting.Catalog.Index>]
-    public sealed class CatalogTable : FragmentControlRestTable
+    public sealed class CatalogTable : FragmentControlDataTable
     {
         /// <summary>
         /// Initializes a new instance of the  class.
@@ -26,7 +28,21 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
         public CatalogTable(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            RestUri = _ => sitemapManager.GetUri<WWW.Api._1_.Catalog.Table>(fragmentContext.ApplicationContext);
+            ServiceFactory = rennderContext => new DataServiceBuilder("data")
+                .Endpoint<WWW.Api._1_.Catalog.Table>()
+                .Method(HttpMethod.Get)
+                .Query(q => q
+                    .Map("search", "q")
+                    .Map("wql", "wql")
+                    .Map("filter", "f")
+                    .Map("page", "p")
+                    .Map("pageSize", "l")
+                    .Map("orderBy", "o")
+                    .Map("orderDir", "d"))
+                .Response(r => r
+                    .Items("items")
+                    .Total("total"))
+                .Build(rennderContext);
         }
 
         /// <summary>
