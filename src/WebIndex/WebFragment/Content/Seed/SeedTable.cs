@@ -29,21 +29,15 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         {
             _sitemapManager = sitemapManager;
 
-            ServiceFactory = rennderContext => new DataServiceBuilder("data")
+            // the logical names of the closed query vocabulary map to their
+            // historical wire names through the typed helpers; this endpoint
+            // answers with an item list rather than the table row shape
+            ServiceFactory = renderContext => new DataServiceBuilder("data")
                 .Endpoint<WWW.Api._1_.Seed.Table>()
                 .Method(HttpMethod.Get)
-                .Query(q => q
-                    .Map("search", "q")
-                    .Map("wql", "wql")
-                    .Map("filter", "f")
-                    .Map("page", "p")
-                    .Map("pageSize", "l")
-                    .Map("orderBy", "o")
-                    .Map("orderDir", "d"))
-                .Response(r => r
-                    .Items("items")
-                    .Total("total"))
-                .Build(rennderContext);
+                .Query(q => q.Search().Wql().Filter().Page().PageSize().OrderBy().OrderDir())
+                .Response(r => r.Items().Total())
+                .Build(renderContext);
         }
 
         /// <summary>
