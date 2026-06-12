@@ -24,8 +24,11 @@
 		<EmbeddedResource Include="../../README.md" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
-	  <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
 	  <PackageReference Include="WebExpress.WebApp" Version="2.0.0-alpha" />
 	</ItemGroup>
 
