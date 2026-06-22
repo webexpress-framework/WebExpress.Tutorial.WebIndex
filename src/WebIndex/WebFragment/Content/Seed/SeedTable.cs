@@ -1,4 +1,6 @@
-﻿using WebExpress.WebApp.WebFragment;
+﻿using System.Net.Http;
+using WebExpress.WebApp.WebData;
+using WebExpress.WebApp.WebFragment;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
@@ -13,7 +15,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
     /// </summary>
     [Section<SectionContentPrimary>]
     [Scope<WWW.Setting.Seed.Index>]
-    public sealed class SeedTable : FragmentControlRestTable
+    public sealed class SeedTable : FragmentControlDataTable
     {
         private readonly ISitemapManager _sitemapManager;
 
@@ -26,7 +28,16 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
             : base(fragmentContext)
         {
             _sitemapManager = sitemapManager;
-            RestUri = _ => _sitemapManager.GetUri<WWW.Api._1_.Seed.Table>(fragmentContext.ApplicationContext);
+
+            // the logical names of the closed query vocabulary map to their
+            // historical wire names through the typed helpers; this endpoint
+            // answers with an item list rather than the table row shape
+            ServiceFactory = renderContext => new DataServiceBuilder("data")
+                .Endpoint<WWW.Api._1_.Seed.Table>()
+                .Method(HttpMethod.Get)
+                .Query(q => q.Search().Wql().Filter().Page().PageSize().OrderBy().OrderDir())
+                .Response(r => r.Items().Total())
+                .Build(renderContext);
         }
 
         /// <summary>

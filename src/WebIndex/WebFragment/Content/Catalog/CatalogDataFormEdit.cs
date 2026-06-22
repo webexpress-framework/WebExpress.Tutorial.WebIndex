@@ -14,7 +14,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Catalog
     /// </summary>
     [Section<SectionContentPreferences>]
     [Scope<WWW.Setting.Catalog.Id.Edit>]
-    public class CatalogFormEdit : FragmentControlRestFormEdit
+    public class CatalogFormEdit : FragmentControlDataFormEdit
     {
         /// <summary>
         /// Gets or sets the uir associated with the object.
