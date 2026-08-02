@@ -50,7 +50,10 @@ A tutorial to demonstrate the `WebIndex`. The tutorial discusses and explains ho
 - Check the result by calling up the following URL in the browser: http://localhost/webindex
 
 Good luck!
+
+## AI transparency notice
+
+Parts of this software, its documentation, and its assets were created with the assistance of AI-based tools, including large language models. AI-assisted contributions are reviewed by the project maintainer before they are included.
     
 # Tags
 #WebExpress #WebServer #WebCore #WebUI #Tutorial #DotNet
-
