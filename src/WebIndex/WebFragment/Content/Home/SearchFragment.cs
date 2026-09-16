@@ -14,7 +14,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     /// </summary>
     [Section<SectionContentPrimary>]
     [Scope<WWW.Index>]
-    public sealed class SearchFragment : FragmentControlPanelFlex
+    public sealed class SearchFragment : FragmentControlFlex
     {
         /// <summary>
         /// Gets the control image for the home content fragment.

@@ -20,7 +20,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
     [Section<SectionContentSecondary>]
     [Scope<WWW.Index>]
     [Condition<SerachCondition>]
-    public sealed class ResultFragment : FragmentControlPanelFlex
+    public sealed class ResultFragment : FragmentControlFlex
     {
         /// <summary>
         /// Gets the list control for displaying search results.
