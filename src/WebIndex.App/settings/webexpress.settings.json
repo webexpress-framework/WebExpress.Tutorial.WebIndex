@@ -1,0 +1,39 @@
+{
+  // The settings of the web server. Every json file in this directory is merged into one
+  // configuration; this file is merged last, so its values win over those of the other files.
+  "WebExpress": {
+
+    // Log file. Mode: Off (no file), Append (keep adding) or Override (start afresh).
+    "Log": {
+      "Mode": "Off",
+      "Debug": true,
+      "Path": "/var/log/",
+      "Encoding": "utf-8",
+      "FileName": "webexpress.log",
+      "TimePattern": "dd.MM.yyyy HH:mm:ss"
+    },
+
+    // The addresses the server listens on. An https endpoint also needs "PfxFile" and "Password".
+    "Endpoints": [
+      { "Uri": "http://localhost/" }
+    ],
+
+    // Optional fine-tuning of the underlying Kestrel server. A value left out keeps its default.
+    "Kestrel": {
+      "MaxConcurrentConnections": 300,
+      "MaxRequestBodySize": 3000000000
+    },
+
+    "Culture": "de-DE",
+
+    "PackagePath": "./packages",
+    "AssetPath": "./assets",
+    "DataPath": "./data",
+    "ContextPath": ""
+  },
+
+  // The settings of the installed plugins, one section per plugin id. A plugin ships its
+  // defaults in its own file next to this one; a value placed here overrides them.
+  "Plugins": {
+  }
+}

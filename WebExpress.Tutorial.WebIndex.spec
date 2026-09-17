@@ -3,7 +3,7 @@
       <id>WebExpress.Tutorial.WebIndex</id>
       <version>2.0.0-alpha</version>
       <title>WebIndex</title>
-      <authors>rene_schwarzer@hotmail.de</authors>
+      <authors>webexpress-framework@outlook.com</authors>
       <license>MIT</license>
       <icon>icon.png</icon>
       <readme>README.md</readme>
