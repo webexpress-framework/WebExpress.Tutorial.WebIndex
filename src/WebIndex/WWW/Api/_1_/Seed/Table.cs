@@ -5,6 +5,7 @@ using WebExpress.WebApp.WebRestApi;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
 using WebExpress.WebCore.WebParameter;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebCore.WebRestApi;
 using WebExpress.WebCore.WebSitemap;
 using WebExpress.WebCore.WebUri;
@@ -19,6 +20,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
     /// </summary>
     [Title("webexpress.tutorial.webindex:setting.seed.label")]
     [Cache]
+    [Policy<SystemAccessPolicy>]
     public sealed class Table : RestApiTable<Model.Seed>
     {
         private readonly ISitemapManager _sitemapManager;

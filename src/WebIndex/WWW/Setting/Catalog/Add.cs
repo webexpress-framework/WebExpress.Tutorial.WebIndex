@@ -2,6 +2,7 @@
 using WebExpress.WebApp.WebSettingPage;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebCore.WebSettingPage;
 using WebExpress.WebUI.WebIcon;
 
@@ -15,6 +16,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Catalog
     [SettingGroup<SettingGroupGeneralGeneral>()]
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
+    [Policy<SystemAccessPolicy>]
     public class Add : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>

@@ -3,6 +3,7 @@ using WebExpress.WebApp.WebScope;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
 using WebExpress.WebCore.WebParameter;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebUI.WebIcon;
 
 namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed.Id
@@ -10,6 +11,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed.Id
     [WebIcon<IconSeedling>]
     [SegmentGuid<ParameterId>()]
     [Scope<IScopeAdmin>]
+    [Policy<SystemAccessPolicy>]
     public sealed class Index : IPage<VisualTreeWebApp>, IScopeAdmin
     {
         /// <summary>

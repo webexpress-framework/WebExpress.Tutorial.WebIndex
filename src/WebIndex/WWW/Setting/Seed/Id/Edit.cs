@@ -2,6 +2,7 @@
 using WebExpress.WebApp.WebSettingPage;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebCore.WebSettingPage;
 
 namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed.Id
@@ -11,6 +12,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Seed.Id
     /// providing controls for entering the item's URI and title.
     /// </summary>
     [Scope<IScopeAdmin>]
+    [Policy<SystemAccessPolicy>]
     public sealed class Edit : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>

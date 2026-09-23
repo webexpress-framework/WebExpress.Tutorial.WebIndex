@@ -2,6 +2,7 @@
 using WebExpress.WebApp.WebSettingPage;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebPage;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebCore.WebSettingPage;
 using WebExpress.WebUI.WebIcon;
 
@@ -16,6 +17,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Setting.Catalog
     [SettingSection(SettingSection.Primary)]
     [Scope<IScopeAdmin>]
     [Domain<Model.CatalogItem>]
+    [Policy<SystemAccessPolicy>]
     public sealed class Index : ISettingPage<VisualTreeWebAppSetting>, IScopeAdmin
     {
         /// <summary>

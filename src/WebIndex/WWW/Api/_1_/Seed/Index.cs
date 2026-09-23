@@ -4,6 +4,7 @@ using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebMessage;
+using WebExpress.WebCore.WebPolicies;
 using WebExpress.WebCore.WebRestApi;
 using WebExpress.WebIndex.Queries;
 
@@ -13,6 +14,7 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
     /// Represents a REST API endpoint for operations on seed entities.
     /// </summary>
     [Cache]
+    [Policy<SystemAccessPolicy>]
     public sealed class Index : RestApiCrud<Model.Seed>
     {
         /// <summary>
