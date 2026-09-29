@@ -26,5 +26,13 @@ namespace WebExpress.Tutorial.WebIndex
         public void Run()
         {
         }
+
+        /// <summary>
+        /// Disposes of the resources used by the plugin. This method is called when the plugin is 
+        /// no longer needed and should release any unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+        }
     }
 }
