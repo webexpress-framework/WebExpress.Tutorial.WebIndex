@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="WebIndex.App/WebExpress.Tutorial.WebIndex.App.csproj" />
   <Project Path="WebIndex/WebExpress.Tutorial.WebIndex.csproj" />
+  <Project Path="WebIndex.Test/WebExpress.Tutorial.WebIndex.Test.csproj" />
 </Solution>

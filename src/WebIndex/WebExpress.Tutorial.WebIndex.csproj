@@ -24,10 +24,6 @@
 		<EmbeddedResource Include="../../README.md" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="HtmlAgilityPack" Version="1.13.1" />
-	</ItemGroup>
-
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
 	  <PackageReference Include="WebExpress.WebApp" Version="2.0.0-alpha" />
 	</ItemGroup>
@@ -37,6 +33,10 @@
 	  <ProjectReference Include="..\..\..\WebExpress.WebCore\src\WebExpress.WebCore\WebExpress.WebCore.csproj" />
 	  <ProjectReference Include="..\..\..\WebExpress.WebIndex\src\WebExpress.WebIndex\WebExpress.WebIndex.csproj" />
 	  <ProjectReference Include="..\..\..\WebExpress.WebUI\src\WebExpress.WebUI\WebExpress.WebUI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="WebExpress.Tutorial.WebIndex.Test" />
 	</ItemGroup>
 
 </Project>

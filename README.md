@@ -49,6 +49,14 @@ A tutorial to demonstrate the `WebIndex`. The tutorial discusses and explains ho
 
 Good luck!
 
+## Crawler implementation
+
+The crawler downloads HTTP and HTTPS pages with `HttpClient` and extracts their title, language, text, and absolute anchor targets with the WebCore `HtmlTokenizer`. Script, style, and comment content is excluded from the index. Relative links remain outside the crawl queue.
+
+The response decoder honors byte order marks, HTTP charset headers, and HTML charset declarations in the first 1024 bytes, in that order. Pages without a usable declaration use UTF-8. Legacy code pages use the encoding provider included in .NET.
+
+For local development, place the framework repositories next to this repository and build with `DebugLocal` so the crawler uses the current WebCore tokenizer. From the repository root, run `dotnet build src/WebIndex.Test/WebExpress.Tutorial.WebIndex.Test.csproj -c DebugLocal`, followed by `src/WebIndex.Test/bin/DebugLocal/net10.0/WebExpress.Tutorial.WebIndex.Test.exe`. Package-based configurations require framework packages built from the corresponding source revision.
+
 ## AI transparency notice
 Parts of this software, its documentation, and its assets were created with the assistance of AI-based tools, including large language models. AI-assisted contributions are reviewed by the project maintainer before they are included.
     

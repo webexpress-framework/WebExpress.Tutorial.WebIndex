@@ -1,7 +1,8 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebExpress.WebApp.WebIndex;
 using WebExpress.WebCore;
@@ -18,6 +19,10 @@ namespace WebExpress.Tutorial.WebIndex.Model
     {
         public static ConcurrentDictionary<Guid, string> Urls = new();
         private const uint MAX_COUNT = 100u;
+        private static readonly HttpClient Client = new(new HttpClientHandler
+        {
+            AutomaticDecompression = DecompressionMethods.All
+        });
 
         /// <summary>
         /// Starts the web crawling process for the given request.
@@ -75,18 +80,21 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// <param name="url">The URL to crawl.</param>
         public static void Crawl(string url)
         {
-            if (url is null || url.StartsWith("mailto") || url.StartsWith("tel") || WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<CatalogItem>($"url='{url}'").Any())
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) ||
+                (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps) ||
+                WebEx.ComponentHub.GetComponentManager<IndexManager>().Retrieve<CatalogItem>($"url='{url}'").Any())
             {
                 return;
             }
 
             try
             {
-                var web = new HtmlWeb();
-                var doc = web.Load(url);
-                var title = doc.DocumentNode.SelectSingleNode("//head/title")?.InnerText;
-                var language = doc.DocumentNode.SelectSingleNode("//html[@lang]")?.GetAttributeValue("lang", "unbekannt");
-                var content = doc.DocumentNode?.InnerText;
+                using var response = Client.GetAsync(uri).GetAwaiter().GetResult();
+                response.EnsureSuccessStatusCode();
+                var page = WebCrawlerPage.ReadAsync(response.Content).GetAwaiter().GetResult();
+                var title = page.Title;
+                var language = page.Language;
+                var content = page.Content;
 
                 if (!string.IsNullOrWhiteSpace(title) && !string.IsNullOrWhiteSpace(content))
                 {
@@ -98,7 +106,7 @@ namespace WebExpress.Tutorial.WebIndex.Model
                         Content = content,
                         MetaData = new MetaData()
                         {
-                            Encoding = doc.Encoding.WebName,
+                            Encoding = page.EncodingName,
                             Language = language,
                             ContentLength = content.Length,
                             Create = DateTime.Now,
@@ -107,14 +115,9 @@ namespace WebExpress.Tutorial.WebIndex.Model
 
                     WebEx.ComponentHub.GetComponentManager<IndexManager>().Insert(webPageData);
 
-                    var links = doc.DocumentNode.SelectNodes("//a[@href]");
-                    foreach (var link in links ?? Enumerable.Empty<HtmlNode>())
+                    foreach (var link in page.Links)
                     {
-                        var hrefValue = link.GetAttributeValue("href", string.Empty);
-                        if (!string.IsNullOrEmpty(hrefValue) && Uri.IsWellFormedUriString(hrefValue, UriKind.Absolute))
-                        {
-                            Urls.TryAdd(Guid.NewGuid(), hrefValue);
-                        }
+                        Urls.TryAdd(Guid.NewGuid(), link);
                     }
                 }
 
@@ -122,8 +125,6 @@ namespace WebExpress.Tutorial.WebIndex.Model
             catch
             {
             }
-
-            //ComponentManager.GetComponent<LogManager>()?.DefaultLog.Info($"add url '{url}' to index");
         }
     }
 }
