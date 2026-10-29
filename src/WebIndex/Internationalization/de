@@ -43,3 +43,4 @@ run.label=Starten
 
 crawl.start=Beginne mit der Indexierung...
 crawl.add=Url '{0}' wird hinzugefügt.<br>Fortschritt: {1}
+setting.seed.url.invalid=Bitte geben Sie eine vollständige HTTP- oder HTTPS-URL ein.

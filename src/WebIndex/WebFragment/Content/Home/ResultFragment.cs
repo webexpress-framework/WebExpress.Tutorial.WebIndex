@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.Tutorial.WebIndex.WebCondition;
@@ -52,20 +53,6 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         };
 
         /// <summary>
-        /// Gets the pagination control for navigating through search results.
-        /// </summary>
-        public ControlPagination Pagination { get; } = new ControlPagination()
-        {
-            Margin = _ => new PropertySpacingMargin
-            (
-                PropertySpacing.Space.Two,
-                PropertySpacing.Space.Auto,
-                PropertySpacing.Space.Two,
-                PropertySpacing.Space.None
-            ),
-        };
-
-        /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="fragmentContext">The context in which the fragment is used.</param>
@@ -79,32 +66,20 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
 
             Add(Counter);
             Add(List);
-            Add(Pagination);
         }
 
         /// <summary>
-        /// Handles the event when a virtual item needs to be retrieved.
+        /// Builds result entries from the same snapshot used for the displayed count.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The event data containing information about the virtual item to retrieve.</param>
-        private void OnRetrieveVirtualItem(object sender, RetrieveVirtualListItemEventArgs e)
+        /// <param name="results">The matching catalog entries.</param>
+        /// <returns>The controls that display each matching document.</returns>
+        internal static IEnumerable<ControlListItem> CreateItems(IEnumerable<CatalogItem> results)
         {
-            var param = e.RenderContext.Request.GetParameter("search");
-
-            if (param is null)
-            {
-                return;
-            }
-
-            var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'");
-
-            Counter.Text = _ => I18N.Translate(e.RenderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
-            e.Items = res.Select
+            return results.Select
             (
                 x => (ControlListItem)new ControlListItem()
                     .Add
                     (
-                        null,
                         new ControlText()
                         {
                             Text = _ => x?.Title,
@@ -113,7 +88,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                         },
                         new ControlText()
                         {
-                            Text = _ => x?.Content.Length > 1000
+                            Text = _ => x?.Content?.Length > 1000
                                 ? string.Concat(x.Content.AsSpan(0, 1000), "...")
                                 : x?.Content,
                             Format = _ => TypeFormatText.Paragraph,
@@ -136,13 +111,6 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
                             )
                         }
                     )
-                //{
-                //    Margin = new PropertySpacingMargin
-                //    (
-                //        PropertySpacing.Space.Null,
-                //        PropertySpacing.Space.Two
-                //    )
-                //}
             );
         }
 
@@ -154,12 +122,31 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
         /// <returns>An HTML node representing the rendered control.</returns>
         public override IHtmlNode Render(IRenderControlContext renderContext, IVisualTreeControl visualTree)
         {
+            if (!FragmentContext.Check(renderContext?.Request))
+            {
+                return null;
+            }
+
             var param = renderContext.Request.GetParameter("search");
-            var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'");
+            var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'")?.ToArray() ?? [];
 
-            Counter.Text = _ => I18N.Translate(renderContext, "webexpress.tutorial.webindex:homepage.conter", res.Count());
+            var counter = new ControlText
+            {
+                Text = _ => I18N.Translate(renderContext, "webexpress.tutorial.webindex:homepage.conter", res.Length),
+                Format = Counter.Format,
+                Margin = Counter.Margin
+            };
 
-            return base.Render(renderContext, visualTree);
+            return new HtmlElementTextContentDiv
+            (
+                counter.Render(renderContext, visualTree),
+                List.Render(renderContext, visualTree, CreateItems(res))
+            )
+            {
+                Id = Id,
+                Class = GetClasses(renderContext),
+                Style = GetStyles(renderContext)
+            };
         }
     }
 }

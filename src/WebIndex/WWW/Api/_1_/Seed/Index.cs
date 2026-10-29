@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System;
+using WebExpress.WebCore.Internationalization;
+using System.Collections.Generic;
 using System.Linq;
 using WebExpress.Tutorial.WebIndex.Model;
 using WebExpress.WebApp.WebRestApi;
@@ -67,7 +69,28 @@ namespace WebExpress.Tutorial.WebIndex.WWW.Api._1_.Seed
         /// </returns>
         protected override IRestApiValidationResult Validate(Model.Seed existingItem, RestApiCrudFormData payload, IRequest request)
         {
-            return base.Validate(existingItem, payload, request);
+            var result = base.Validate(existingItem, payload, request);
+            var proposed = new Model.Seed { Url = existingItem?.Url };
+            payload.BindTo(proposed);
+
+            if (!IsValidUrl(proposed.Url))
+            {
+                result.Add(I18N.Translate(request?.Culture, "webexpress.tutorial.webindex:setting.seed.url.invalid"), nameof(Model.Seed.Url));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Restricts crawl targets to absolute HTTP and HTTPS addresses with a host.
+        /// </summary>
+        /// <param name="value">The proposed seed address.</param>
+        /// <returns>True when the crawler can request the address.</returns>
+        internal static bool IsValidUrl(string value)
+        {
+            return Uri.TryCreate(value, UriKind.Absolute, out var uri)
+                && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
+                && !string.IsNullOrWhiteSpace(uri.Host);
         }
 
         /// <summary>

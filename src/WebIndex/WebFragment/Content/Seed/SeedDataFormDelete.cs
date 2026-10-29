@@ -1,4 +1,5 @@
-﻿using WebExpress.WebApp.WebFragment;
+using WebExpress.WebApp.WebData;
+using WebExpress.WebApp.WebFragment;
 using WebExpress.WebApp.WebSection;
 using WebExpress.WebCore.WebAttribute;
 using WebExpress.WebCore.WebFragment;
@@ -25,7 +26,10 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         public SeedDataFormDelete(ISitemapManager sitemapManager, IFragmentContext fragmentContext)
             : base(fragmentContext)
         {
-            Uri = _ => sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext);
+            ServiceFactory = _ => new DataServiceDescriptor("data")
+            {
+                BaseUri = sitemapManager.GetUri<WWW.Api._1_.Seed.Index>(fragmentContext.ApplicationContext)?.ToString()
+            };
         }
 
         /// <summary>
@@ -42,7 +46,7 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Seed
         /// </returns>
         public override IHtmlNode Render(IRenderControlFormContext renderContext, IVisualTreeControl visualTree)
         {
-            var id = renderContext.Request.GetParameter<ParameterId>();
+            ItemId = context => context.Request.GetParameter<ParameterId>()?.Value;
 
             return base.Render(renderContext, visualTree);
         }

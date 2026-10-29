@@ -43,3 +43,4 @@ run.label=Run
 
 crawl.start=Begin indexing...
 crawl.add=Url '{0}' is being added.<br>Progress: {1}
+setting.seed.url.invalid=Enter an absolute HTTP or HTTPS URL.
