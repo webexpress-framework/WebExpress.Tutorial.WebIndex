@@ -2,8 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
-		<Version>2.0.0.0</Version>
-		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<Version>2.0.1-alpha</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/webexpress-framework/WebExpress.Tutorial.WebIndex.git</RepositoryUrl>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
@@ -25,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
-	  <PackageReference Include="WebExpress.WebApp" Version="2.0.0-alpha" />
+	  <PackageReference Include="WebExpress.WebApp" Version="2.0.1-alpha" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' == 'DebugLocal'">

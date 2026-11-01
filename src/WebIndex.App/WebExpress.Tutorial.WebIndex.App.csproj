@@ -3,22 +3,25 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net10.0</TargetFramework>
-		<Version>0.0.11.0</Version>
-		<AssemblyVersion>0.0.11.0</AssemblyVersion>
+		<Version>2.0.1-alpha</Version>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
-		<PackageReference Include="WebExpress.WebApp" Version="2.0.0-alpha" />
+		<PackageReference Include="WebExpress.WebApp" Version="2.0.1-alpha" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\WebIndex\WebExpress.Tutorial.WebIndex.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<PackageRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..'))</PackageRoot>
+	</PropertyGroup>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
-		<Exec Command="$(SolutionDir)$(AssemblyName)/bin/$(Configuration)/$(TargetFramework)/$(AssemblyName).exe -s $(SolutionDir)/$(SolutionName).spec -c $(Configuration) -t $(TargetFramework) -o $(SolutionDir)/pkg/$(Configuration)" />
+		<Exec Command="&quot;$(TargetDir)$(AssemblyName).exe&quot; -s &quot;$(PackageRoot)\WebExpress.Tutorial.WebIndex.spec&quot; -c $(Configuration) -t $(TargetFramework) -o &quot;$(PackageRoot)\pkg\$(Configuration)&quot;" />
 	</Target>
 
 	<ItemGroup>
