@@ -7,6 +7,7 @@ using WebExpress.WebCore.Internationalization;
 using WebExpress.WebCore.WebApplication;
 using WebExpress.WebCore.WebComponent;
 using WebExpress.WebCore.WebPage;
+using WebExpress.WebIndex.Wql.Predicate;
 using WebExpress.WebUI.WebNotification;
 
 namespace WebExpress.Tutorial.WebIndex.Model
@@ -43,6 +44,24 @@ namespace WebExpress.Tutorial.WebIndex.Model
             _indexManager.Create<Seed>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
             _indexManager.Create<CatalogItem>(CultureInfo.CurrentCulture, WebExpress.WebIndex.IndexType.Storage);
 
+            // site('<host>') stands for the pages of one site; the ids are collected when a
+            // statement is read, so a search sees the catalog as it is at that moment
+            _indexManager.RegisterWqlPredicate(new WqlPredicate<CatalogItem>("site", arguments =>
+            {
+                var host = arguments.Count == 1 ? arguments[0] as string : null;
+                if (string.IsNullOrWhiteSpace(host))
+                {
+                    throw new ArgumentException("site expects the host of a site.");
+                }
+
+                var ids = _indexManager.All<CatalogItem>()
+                    .Where(x => IsOnSite(x.Url, host))
+                    .Select(x => x.Id)
+                    .ToHashSet();
+
+                return x => ids.Contains(x.Id);
+            }));
+
 
             if (!_indexManager.All<Seed>().Any())
             {
@@ -57,6 +76,23 @@ namespace WebExpress.Tutorial.WebIndex.Model
         /// Clears all documents from the catalog associated with the specified request.
         /// </summary>
         /// <param name="context"> The render context containing the request information.</param>
+        /// <summary>
+        /// Tells whether an address belongs to a site, its subdomains included.
+        /// </summary>
+        /// <param name="url">The address of a page.</param>
+        /// <param name="host">The host of the site, such as wikipedia.org.</param>
+        /// <returns>True when the page is on the site.</returns>
+        private static bool IsOnSite(string url, string host)
+        {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            {
+                return false;
+            }
+
+            return uri.Host.Equals(host, StringComparison.OrdinalIgnoreCase)
+                || uri.Host.EndsWith("." + host, StringComparison.OrdinalIgnoreCase);
+        }
+
         public static void ClearCatalog(IRenderContext context)
         {
             _componentHub?.GetComponentManager<IndexManager>()?.Clear<CatalogItem>();

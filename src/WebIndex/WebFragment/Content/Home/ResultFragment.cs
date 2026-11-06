@@ -128,7 +128,16 @@ namespace WebExpress.Tutorial.WebIndex.WebFragment.Content.Home
             }
 
             var param = renderContext.Request.GetParameter("search");
-            var res = ViewModel.Retrieve($"Content ~ '{param?.Value}'")?.ToArray() ?? [];
+            var site = renderContext.Request.GetParameter("site")?.Value?.Trim().Replace("'", "");
+            var wql = $"Content ~ '{param?.Value}'";
+
+            // the site predicate is a whole condition of its own, joined to the text search
+            if (!string.IsNullOrWhiteSpace(site))
+            {
+                wql += $" and site('{site}')";
+            }
+
+            var res = ViewModel.Retrieve(wql)?.ToArray() ?? [];
 
             var counter = new ControlText
             {

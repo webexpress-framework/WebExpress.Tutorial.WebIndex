@@ -15,6 +15,7 @@ homepage.conter=Ungefähr {0} Ergebnisse
 infopage.label=Info
 search.label=Suchen
 search.placeholder=enter wql
+search.site.placeholder=Website, z. B. wikipedia.org
 setting.label=Einstellungen
 setting.general.label=Allgemein
 setting.seed.label=Startpunkt

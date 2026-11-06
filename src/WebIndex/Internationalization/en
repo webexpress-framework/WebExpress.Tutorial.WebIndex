@@ -15,6 +15,7 @@ homepage.conter=About {0} results
 infopage.label=Info
 search.label=Search
 search.placeholder=enter wql
+search.site.placeholder=site, e.g. wikipedia.org
 setting.label=Settings
 setting.general.label=General
 setting.seed.label=Seed

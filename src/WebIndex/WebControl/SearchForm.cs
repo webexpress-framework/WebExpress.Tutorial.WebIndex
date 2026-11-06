@@ -25,6 +25,14 @@ namespace WebExpress.Tutorial.WebIndex.WebControl
                 Styles = ["width: 30rem;"]
             });
 
+            // narrows the search to one site through the site predicate of the catalog
+            Add(new ControlFormItemInputText()
+            {
+                Name = _ => "site",
+                Placeholder = _ => "webexpress.tutorial.webindex:search.site.placeholder",
+                Styles = ["width: 14rem;"]
+            });
+
             AddPrimaryButton(new ControlFormItemButtonSubmit()
             {
                 Text = _ => "webexpress.tutorial.webindex:search.label",
