@@ -2,14 +2,14 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net10.0</TargetFramework>
-		<Version>2.0.1-alpha</Version>
+		<TargetFramework>net11.0</TargetFramework>
+		<Version>2.0.2-alpha</Version>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(Configuration)' != 'DebugLocal'">
-		<PackageReference Include="WebExpress.WebApp" Version="2.0.1-alpha" />
+		<PackageReference Include="WebExpress.WebApp" Version="2.0.2-alpha" />
 	</ItemGroup>
 
 	<ItemGroup>
